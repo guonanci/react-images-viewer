@@ -1,0 +1,25 @@
+{
+  "name": "react-images-viewer",
+  "version": "0.0.1",
+  "description": "Create an react-images-viewer component.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guonanci/react-images-viewer.git"
+  },
+  "keywords": [
+    "react-photo",
+    "react-images",
+    "react-photo-viewer",
+    "react-images-viewer"
+  ],
+  "author": "yiminanci <yiminanci@gmail.com> (https://segmentfault.com/u/yiminanci)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guonanci/react-images-viewer/issues"
+  },
+  "homepage": "https://github.com/guonanci/react-images-viewer#readme"
+}
