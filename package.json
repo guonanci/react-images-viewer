@@ -4,9 +4,10 @@
   "description": "Create an react-images-viewer component.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter spec",
+    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec --colors test/*",
     "coveralls": "cat ./coverage/lcov/lcov.info | ./node_modules/.bin/coveralls",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec test/*"
+    "coverage-old": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec test/*",
+    "coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
