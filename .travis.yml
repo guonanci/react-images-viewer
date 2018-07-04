@@ -12,9 +12,9 @@ install:
 
 script:
   - npm test
-  - npm run dev
-  - npm run build
-  - npm run checkdir
-after_script:
+  # - npm run dev
+  # - npm run build
+  # - npm run checkdir
+# after_script:
   - npm run coverage
   # Send coverage data to Coveralls after _script: 'cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js'
