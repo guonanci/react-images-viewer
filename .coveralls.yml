@@ -1,10 +1,10 @@
 service_name: travis-ci
 repo_token: S5CSBnH2886RuV3s0ecSjaam2N4JOjsC7
-coverageReporter: {
-    dir: path.join(__dirname, 'coverage'),
-    reporters: [
-        {type: 'html'},
-        {type: 'lcov', subdir: 'lcov'}  // lcov
-    ]
-},
+# coverageReporter: {
+#     dir: path.join(__dirname, 'coverage'),
+#     reporters: [
+#         {type: 'html'},
+#         {type: 'lcov', subdir: 'lcov'}  // lcov
+#     ]
+# },
 
