@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec",
+    "coveralls": "cat ./coverage/lcov/lcov.info | ./node_modules/.bin/coveralls",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec test/*"
   },
   "repository": {

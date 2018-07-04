@@ -8,10 +8,13 @@ cache:
 before_install:
   - npm install
 install:
-  - npm install
+|
+  npm install -g npm@latest
+  npm --version
+  npm install --registry https://registry.npmjs.org
 
 script:
-  - npm test
+  - npm run test
   # - npm run dev
   # - npm run build
   # - npm run checkdir
