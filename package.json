@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha --reporter spec",
-    "cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec test/*"
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec test/*"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
-    "coveralls": "^3.0.1",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "^1.3.0"
+    "coveralls": "^3.0.2",
+    "mocha": "^5.2.0"
   }
 }
