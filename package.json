@@ -14,10 +14,22 @@
     "url": "git+https://github.com/guonanci/react-images-viewer.git"
   },
   "keywords": [
-    "react-photo",
+    "react",
+    "react-component",
+    "react images",
     "react-images",
-    "react-photo-viewer",
-    "react-images-viewer"
+    "react-images-viewer",
+    "lightbox",
+    "react lightbox",
+    "react-lightbox",
+    "carousel",
+    "react-carousel",
+    "react carousel",
+    "gallery",
+    "react-gallery",
+    "react gallery",
+    "react-photo",
+    "react-photo-viewer"
   ],
   "author": "yiminanci <yiminanci@gmail.com> (https://segmentfault.com/u/yiminanci)",
   "license": "MIT",
