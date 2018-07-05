@@ -58,8 +58,9 @@ Example using srcSet:
   imgs={LIGHTBOX_IMG_SET}
   ...
 >
+```
 
-
+```js
 const LIGHTBOX_IMG_SET = [
   {
     src: 'http://example.com/img1.svg',
@@ -82,7 +83,6 @@ const LIGHTBOX_IMG_SET = [
     ]
   }
 ]
-
 ```
 
 ## Options
