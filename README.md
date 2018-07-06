@@ -90,11 +90,29 @@ const LIGHTBOX_IMG_SET = [
 Property      | Type      | Default     | Description
 :-----------|:------------|:-------------|:-------------
 backdropCloseable | bool | false | Allow users to exit the lightbox by clicking the backdrop
-closeBtnTitle | string | ' Close (Esc) ' | Customize close esc title
+closeBtnTitle | str | ' Close(Esc) ' | Customize close esc title
 enableKeyboardInput | bool | true | Supports keyboard input - <code>esc</code>, <code>arrow left</code>, and <code>arrow right</code>
-currentImage | number | 0 | The index of the image to display initially
+initialIdx | num | 0 | The index of the image to display initially
+customCtrls | arr | undefined | An arr of elements to display as custom controls on the top of lightbox
+imgs | arr | undefined | Required. Arr of img objs See img opts table below
+imgsSeparator | str | ' of ' | Customize separator in the image count
+isOpen | bool | false | Whether or not the lightbox is displayed leftArrowTitle | str | ' Previous(left arrow key)' | Customize of left arrow title
+onClickPrev | func | undefined | Fired on request of the previous img
+onClickNext | func | undefined | Fired on request of the next img
+onClose | func | undefined | Handle closing of the lightbox
+onClickImg | func | undefined | Handle click on currImg
+onClickThumbnail | func | undefined | Handle click on thumbnail
+preloadNextImg | bool | true | Preload the next available img whatever direction the user is navigating
+rightArrowTitle | str | 'Next(right arrow key)' | Customize right arrow title
+showCloseBtn | bool | true | Optionally display a close 'X' btn in top right corner
+showImgCount | bool | true | Optionally display img index, e.g., "2 of 20"
+width | number | 1024| Maximum width of the carousel; defaults to 1024px spinner | func | DefaultSpinner | Spinner component class
+spinnerColor | str | 'white' | Color of spinner
+spinnnerSize | num | 80 | Size of spinner
+preventAutoScroll | bool | true | Determines whether auto=scrolling is prevented
 
 ## Imgs Object
+
 Property      | Type     | Default      | Description
 :----------|:----------|:----------|:----------
 src     | str     | undefined     | Required
