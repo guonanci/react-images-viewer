@@ -5,13 +5,14 @@
 
 A react library that view photos list easily, and a simple, responsive lightbox component for display an array of images
 
-
 ## Quick start
 
 ```bash
 npm install react-images-viewer --save
 ```
+
 or
+
 ```bash
 # recommended
 yarn add react-images-viewer

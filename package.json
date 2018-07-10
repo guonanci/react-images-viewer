@@ -2,8 +2,13 @@
   "name": "react-images-viewer",
   "version": "0.0.2",
   "description": "Create an react-images-viewer component.",
-  "main": "index.js",
+  "main": "lib/Viewer.js",
+  "jsnext:main": "dist/react-images-viewer.es.js",
   "scripts": {
+    "build": "nps build",
+    "publish:examples": "NODE_ENV=production nps publish",
+    "start": "webpack-dev-server --progress",
+    "lint": "eslint src/** examples/src/app.js examples/src/components/Gallery.js",
     "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec --colors test/*",
     "coveralls": "cat ./coverage/lcov/lcov.info | ./node_modules/.bin/coveralls",
     "coverage-old": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec test/*",
@@ -33,18 +38,46 @@
   ],
   "author": "yiminanci <yiminanci@gmail.com> (https://segmentfault.com/u/yiminanci)",
   "license": "MIT",
+  "responsitory": {
+    "type": "git",
+    "url": "https://github.com/guonanci/react-images-viewer.git"
+  },
   "bugs": {
     "url": "https://github.com/guonanci/react-images-viewer/issues"
   },
   "homepage": "https://github.com/guonanci/react-images-viewer#readme",
   "devDependencies": {
     "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.5",
+    "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "coveralls": "^3.0.2",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.1.0",
+    "eslint-plugin-react": "^7.10.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
     "istanbul": "^0.4.5",
+    "less": "^3.5.3",
+    "less-loader": "^4.1.0",
     "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "^1.3.0"
+    "mocha-lcov-reporter": "^1.3.0",
+    "nps": "^5.9.2",
+    "nps-utils": "^1.6.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "rollup": "^0.62.0",
+    "style-loader": "^0.21.0",
+    "uglify-es": "^3.3.9",
+    "webpack": "^4.15.1",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "aphrodite": "^2.2.2",
+    "prop-types": "^15.6.2",
+    "react-transition-group": "^2.4.0"
   }
 }
