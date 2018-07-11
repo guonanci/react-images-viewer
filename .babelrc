@@ -1,4 +1,5 @@
 {
+  "ignore": ["node-modules/**"],
   "env": {
     "test": {
       "presets": ["env", "stage-2"]
