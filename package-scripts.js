@@ -17,5 +17,12 @@ module.exports = {
         'lessc examples/src/example.less examples/dist/example.css'
       ),
     },
+    publish: {
+      default: series(
+        rimraf('examples/dist'),
+        'webpack --progress -p',
+        'git subtree push --prefix examples/dist origin gh-pages'
+      )
+    }
   }
 }
