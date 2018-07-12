@@ -45,7 +45,20 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'react-images': path.resolve(__dirname, 'src/Lightbox'),
+      'react-images-viewer': path.resolve(__dirname, 'src/Viewer'),
     }
-  }
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'common.js',
+      minChunk: 2,
+    })
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      inject: false,
+      template: path.resolve(__dirname, 'examples/src/index.html')
+    }),
+    new ExtractTextPlugin('example.css')
+  ]
 }
