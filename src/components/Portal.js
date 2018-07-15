@@ -15,7 +15,7 @@ export default class Portal extends Compon9ent {
     this.portalElement = p
     this.componentDidUpdate()
   }
-  componentDidUpdate() {s
+  componentDidUpdate() {
     const duration = 200
     const styles = `
       .fade-eneter { opacity: .01; }
