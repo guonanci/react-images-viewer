@@ -80,7 +80,7 @@ class Viewer extends Component {
       window.removeEventListener('keydown', this.handleKeyboardInput)
     }
   }
-  UNSAFE_componentWillMount () {
+  UNSAFE_componentWillUnmount () {
     if (this.props.enableKeyboardInput) {
       window.removeEventListener('keydown', this.handleKeyboardInput)
     }
