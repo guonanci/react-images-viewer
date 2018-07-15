@@ -69,7 +69,7 @@ class Viewer extends Component {
     // preload currImg
     if (this.props.currImg !== nextProps.currImg || !this.props.isOpen && nextProps.isOpen) {
       const img = this.preloadImg(nextProps.currImg, this.handleImgLoaded)
-      this.setState({ imgLoaded: img.compldte })
+      this.setState({ imgLoaded: img.complete })
     }
 
     // add/remove event listeners
