@@ -10,7 +10,7 @@ import Footer from './components/Footer'
 import Header from '/components/Header'
 import PaginatedThumbnails from '/components/PaginatedThumbnails'
 import Portal from '/components/Portal'
-import DefaultSpinner from '/components/DefaultSpinner'
+import DefaultSpinner from '/components/Spinner'
 
 import { bindFunctions, canUseDom, deepMerge } from './utils/util'
 
@@ -36,7 +36,7 @@ class Viewer extends Component {
       'gotoNext',
       'gotoPrev',
       'closeBackdrop',
-      'hahndleKeyboardInput',
+      'handleKeyboardInput',
       'handleImgLoaded'
     ])
   }
@@ -58,9 +58,9 @@ class Viewer extends Component {
   UNSAFE_componentWillReceiveProps (nextProps) {
     if (!canUseDom) return
 
-    // preload imgs, always to preload imgs with both directions
-    // then when user changs direction, img also shos quickly
-    if (nextProps.preoadNextImg) {
+    // always to preload imgs with both directions
+    // then when user changs direction, img also show quickly
+    if (nextProps.preloadNextImg) {
       const nextIdx = nextProps.currImg + 1
       const prevIdx = nextProps.currImg - 1
       this.preloadImg(prevIdx)
@@ -339,6 +339,7 @@ Viewer.propTypes = {
   onClickImg: PropTypes.func,
   onClickNext: PropTypes.func,
   onClickPrev: PropTypes.func,
+  onClickThumbnail: PropTypes.func,
   onClose: PropTypes.func.isRequired,
   preloadNextImg: PropTypes.bool,
   preventScroll: PropTypes.bbool,
@@ -383,10 +384,10 @@ const defaultStyles = {
   figure: {
     margin: 0, // remove browser default
   },
-  image: {
+  img: {
     display: 'block', // removes browser default gutter
     height: 'auto',
-    margin: '0 auto', // main center on very short screens or very
+    margin: '0 auto', // main center on very short screens or very narrow img
     maxWidth: '100%',
 
     // disable user select
@@ -395,9 +396,9 @@ const defaultStyles = {
 
     // opacity animation on image load
     opacity: 0,
-    transition: 'opacity 0.3s',
+    transition: 'opacity .3s',
   },
-  iamgeLoaded: {
+  imgLoaded: {
     opcaty: 1,
   },
   spinner: {
@@ -408,7 +409,7 @@ const defaultStyles = {
 
     // opacity animation to make spinner appear with delay
     opacity: 0,
-    transition: 'opacity 0.3s',
+    transition: 'opacity .3s',
   },
   spinnerActive: {
     opacity: 1,
