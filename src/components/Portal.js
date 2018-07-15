@@ -4,7 +4,7 @@ import { CSSTransitionGroup } from 'react-transition-group'
 import { render, unmountComponentAtNode } from 'react-dom'
 import PassContext from './PassContext'
 
-export default class Portal extends Compon9ent {
+export default class Portal extends Component {
   constructor () {
     super()
     this.portalElement = null
