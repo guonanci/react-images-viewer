@@ -339,7 +339,7 @@ Viewer.propTypes = {
   onClickThumbnail: PropTypes.func,
   onClose: PropTypes.func.isRequired,
   preloadNextImg: PropTypes.bool,
-  preventScroll: PropTypes.bbool,
+  preventScroll: PropTypes.bool,
   rightArrowTitle: PropTypes.string,
   showCloseBtn: PropTypes.bool,
   showImgCount: PropTypes.bool,
