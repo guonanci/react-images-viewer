@@ -194,10 +194,7 @@ class Viewer extends Component {
 
     if (!isOpen) return <span key="closed" />
 
-    let offsetThumbnails = 0
-    if (showThumbnails) {
-      offsetThumbnails = this.theme.thumnail.size + this.theme.container.gutter.vertical
-    }
+    const offsetThumbnails = showThumbnails ? 0 : this.theme.thumnail.size + this.theme.container.gutter.vertical
 
     return (
       <Container
