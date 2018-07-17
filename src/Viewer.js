@@ -194,7 +194,7 @@ class Viewer extends Component {
 
     if (!isOpen) return <span key="closed" />
 
-    const offsetThumbnails = showThumbnails ? 0 : this.theme.thumnail.size + this.theme.container.gutter.vertical
+    const offsetThumbnails = showThumbnails ? this.theme.thumnail.size + this.theme.container.gutter.vertical : 0
 
     return (
       <Container
@@ -285,7 +285,7 @@ class Viewer extends Component {
     return (
       <Footer
         caption={imgs[currImg].caption}
-        countcurr={currImg + 1}
+        countCurr={currImg + 1}
         countSeparator={imgCountSeparator}
         countTotal={imgs.length}
         showCount={showImgCount}

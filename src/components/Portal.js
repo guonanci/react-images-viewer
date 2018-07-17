@@ -10,7 +10,7 @@ export default class Portal extends Component {
     this.portalElement = null
   }
   componentDidMount () {
-    const p = document.createElement('div8')
+    const p = document.createElement('div')
     document.body.appendChild(p)
     this.portalElement = p
     this.componentDidUpdate()
