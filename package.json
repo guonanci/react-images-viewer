@@ -75,9 +75,13 @@
     "webpack": "^4.15.1",
     "webpack-dev-server": "^3.1.4"
   },
+  "peerDependencies": {
+    "react": "^15.0 || ^16.0",
+    "react-dom": "^15.0 || ^16.0"
+  },
   "dependencies": {
     "aphrodite": "^2.2.2",
     "prop-types": "^15.6.2",
-    "react-transition-group": "^2.4.0"
+    "react-transition-group": "1.1.3"
   }
 }

@@ -8,13 +8,15 @@ class PassContext extends Component {
     return this.props.context
   }
   render () {
+    // Verifies that children has only one child(a React element) and returns it. Otherwise this method throws an error.
     return Children.only(this.props.children)
   }
 }
 
 
 PassContext.propTypes = {
-  context: PropTypes.object.isRequired
+  context: PropTypes.object.isRequired,
+  children: PropTypes.element
 }
 PassContext.childContextTypes = {
   theme: PropTypes.object

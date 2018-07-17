@@ -10,7 +10,7 @@ function Header ({ customControls, onClose, showCloseBtn, closeBtnTitle, ...prop
   const classes = StyleSheet.create(deepMerge(defaultStyles, theme))
 
   return (
-    <div>
+    <div className={css(classes.header)} {...props}>
       {customControls ? customControls : <span />}
       {!!showCloseBtn && (
         <button
@@ -29,6 +29,7 @@ Header.propTypes = {
   customControls: PropTypes.array,
   onClose: PropTypes.func.isRequired,
   showCloseBtn: PropTypes.bool,
+  closeBtnTitle: PropTypes.string,
 }
 Header.contextTypes = {
   theme: PropTypes.object.isRequired,

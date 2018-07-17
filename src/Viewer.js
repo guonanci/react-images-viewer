@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { StyleSheet, css } from 'aphrodite'
 import ScrollLock from 'react-scrolllock'
 
@@ -202,7 +202,7 @@ class Viewer extends Component {
         onClick={backdropCloseable && this.closeBackdrop}
         onTouchEnd={backdropCloseable && this.closeBackdrop}
       >
-        <div>
+        <Fragment>
           <div className={css(this.classes.content)} style={{ marginBottom: offsetThumbnails, maxWidth: width }}>
             {imgLoaded && this.renderHeader()}
             {this.renderImgs()}
@@ -213,7 +213,7 @@ class Viewer extends Component {
           {imgLoaded && this.renderArrowPrev()}
           {imgLoaded && this.renderArrowNext()}
           {this.props.preventScroll && <ScrollLock />}
-        </div>
+        </Fragment>
       </Container>
     )
   }
