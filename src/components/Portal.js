@@ -40,7 +40,7 @@ export default class Portal extends Component {
       this.portalElement
     )
   }
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillUnmount() {
     unmountComponentAtNode(this.portalElement)
     document.body.removeChild(this.portalElement)
   }
