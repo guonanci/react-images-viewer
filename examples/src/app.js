@@ -1,14 +1,59 @@
 import React from 'react'
-import Standard from './components/Standard'
+import { render } from 'react-dom'
+import Gallery from './components/Gallery'
+import CustomSpinner from './components/Spinner'
+import './example.less'
 
-const imgs = [
-  'https://pixabay.com/zh/%E7%81%AF-%E5%85%89-%E7%85%A7%E6%98%8E-%E7%81%AF%E6%B3%A1-%E7%88%B1%E8%BF%AA%E7%94%9F%E7%9A%84%E7%81%AF%E6%B3%A1-edisson-%E9%A2%86%E5%AF%BC-%E6%8A%80%E6%9C%AF-3489395/',
-  'https://pixabay.com/zh/%E9%85%8D%E5%90%88-%E8%9D%B4%E8%9D%B6-%E6%80%A7%E8%B4%A8-%E6%98%86%E8%99%AB-%E5%85%B3%E9%97%AD-%E5%A4%8F%E5%AD%A3-%E7%BF%BC-%E5%8A%A8%E7%89%A9%E4%B8%96%E7%95%8C-3495224/',
-  'https://pixabay.com/zh/%E7%8B%97-%E9%9B%AA-%E5%9C%A3%E4%BC%AF%E7%BA%B3%E5%BE%B7%E7%8B%97-%E5%86%AC%E5%A4%A9-%E5%AE%A0%E7%89%A9-%E5%8A%A8%E7%89%A9-%E6%AF%9B%E7%9A%AE-%E5%86%B7-1168663/',
-  'https://pixabay.com/zh/%E5%A4%8F%E5%B0%94-%E9%A9%AC-%E7%99%BD%E9%A9%AC-%E8%8D%89%E6%A1%88-%E7%99%BD%E8%89%B2%E7%9A%84%E8%A3%99%E5%AD%90-%E6%97%A5%E8%90%BD-%E5%A5%B3%E5%AD%A9%E5%92%8C%E9%A9%AC-%E5%8F%8B%E8%B0%8A-3481756/',
-  'https://pixabay.com/zh/%E6%A8%B1%E6%A1%83-%E6%B0%B4%E6%9E%9C-%E6%B5%86%E6%9E%9C-%E7%BA%A2%E8%89%B2-%E5%85%B3%E4%BA%8E-%E6%96%B0%E9%B2%9C-%E5%85%B3%E9%97%AD-%E7%BE%8E%E5%91%B3-%E6%88%90%E7%86%9F-%E5%A4%8F%E5%AD%A3-3477927/'
+function makeUnsplashSrc (id) {
+  return `https://images.unsplash.com/photo-${id}?dpr=2&auto=format&w=1024&h=1024`
+}
+function makeUnsplashSrcSet(id, size) {
+  return `https://images.unsplash.com/photo-${id}?dpr=2&auto=format&w=${size} ${size}w`
+}
+function makeUnsplashThumbnail (id, orientation = 'landscape') {
+  const dimensions = orientation === 'square' ?
+    'w=300&h=300' :
+    'w=240&h=159'
+
+  return `https://images.unsplash.com/photo-${id}?dpr=2&auto=format&crop=faces&fit=crop&${dimensions}`
+}
+
+// Unsplash images from the "Adventure" collection
+// https://unsplash.com/collections/369/adventure
+
+const DEFAULT_IMAGES = [
+  { id: '1526784725085-c69e947bf92e', caption: 'Photo by Mavin Mayer', orientation: 'square', useForDemo: true },
+  { id: '1522985225914-17a10a58c8ec', caption: 'Photo by Blake Cheek', orientation: 'square', useForDemo: true },
+  { id: '1522931698295-e7b4d3e4188f', caption: 'Photo by Oliver Sjöström', orientation: 'square', useForDemo: true },
+  { id: '1516175663209-ac2459a5652f', caption: 'Photo by Jeremy Bishop', orientation: 'square', useForDemo: true },
+  { id: '1515911601378-97de98db6dda', caption: 'Photo by Emily Reider', orientation: 'square', useForDemo: true },
+]
+const THEMED_IMAGES = [
+  { id: '1482398650355-d4c6462afa0e', caption: 'Photo by Andrew Neel', orientation: 'landscape', useForDemo: true },
+  { id: '1514949823529-bdcc933a9339', caption: 'Photo by Kristopher Roller', orientation: 'landscape', useForDemo: true },
+  { id: '1503293962593-47247718a17a', caption: 'Photo by Jeremy Bishop', orientation: 'landscape', useForDemo: true },
+  { id: '1509914398892-963f53e6e2f1', caption: 'Photo by Linus Nylund', orientation: 'landscape', useForDemo: true },
+  { id: '1506773090264-ac0b07293a64', caption: 'Photo by Dan Grinwis', orientation: 'square', useForDemo: true },
+]
+const THUMBNAIL_IMAGES = [
+  { id: '1509529711801-deac231925ac', caption: 'Photo by Joshua Earle', orientation: 'landscape', useForDemo: true },
+  { id: '1501963422762-3d89bd989568', caption: 'Photo by Jeremy Bishop', orientation: 'landscape', useForDemo: true },
+  { id: '1499062229216-7c6349e898fb', caption: 'Photo by Leio McLaren', orientation: 'square', useForDemo: true },
+  { id: '1495619744764-2cc11fcbe5f0', caption: 'Photo by Philipp Kämmerer', orientation: 'square', useForDemo: true },
+  { id: '1418846531910-2b7bb1043512', caption: 'Photo by Vincentiu Solomon', orientation: 'landscape', useForDemo: true },
+  { id: '1488584433697-7ccc1148d30c', caption: 'Photo by Flecher Clay', orientation: 'square', useForDemo: true },
+  { id: '1478562853135-c3c9e3ef7905', caption: 'Photo by Austin Neil', orientation: 'landscape', useForDemo: true },
+  { id: '1476111021705-ac3b3304fe20', caption: 'Photo by Dino Reichmuth', orientation: 'square', useForDemo: true },
+  { id: '1478001517127-fccc92f54906', caption: 'Photo by Joshua Earle', orientation: 'landscape', useForDemo: true },
+  { id: '1455383333344-451b6147021b', caption: 'Photo by Joshua Earle', orientation: 'landscape', useForDemo: true },
 ]
 
+const theme = {
+  // container
+  container: {
+    background: 'rgba(255, 255, 255, .9)'
+  }
+}
 React.render(
   <div>
     <Standard imgs={imgs} />

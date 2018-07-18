@@ -124,10 +124,10 @@ export default class PaginatedThumbnails extends Component {
     return (
       <div className={css(classes.paginatedThumbnails)}>
         {this.renderArrowPrev()}
-        {thumbnails.map((imgs, idx) => (
+        {thumbnails.map((img, idx) => (
           <Thumbnail
             key={baseOffset + idx}
-            {...imgs}
+            {...img}
             index={baseOffset + idx}
             onclick={onClickThumbnail}
             active={baseOffset + idx === currImg}

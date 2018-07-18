@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
+import React from 'react'
 import { css, StyleSheet } from 'aphrodite/no-important'
 import defaults from '../theme'
 import { deepMerge } from '../utils/util'
 
-function Footer ({caption, countCurr, countSeparator, countTotal, showCount, ...props, }, { theme }) {
-  if (!cpation && !showcount) return null
+function Footer ({ caption, countCurr, countSeparator, countTotal, showCount, ...props }, { theme }) {
+  if (!caption && !showCount) return null
 
   const classes = StyleSheet.create(deepMerge(defaultStyles, theme))
 

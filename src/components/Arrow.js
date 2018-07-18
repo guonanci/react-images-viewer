@@ -6,13 +6,13 @@ import defaults from '../theme'
 import { deepMerge } from '../utils/util'
 import Icon from './Icon'
 
-function Arrow ({ direction, icon, onClick, size, ...props, }, { theme, }) {
+function Arrow ({ direction, icon, onClick, size, ...props }, { theme, }) {
   const classes = StyleSheet.create(deepMerge(defaultStyles, theme))
 
   return (
     <button
       type="button" // default: submit
-      className={css(classes.arrow, classes['arrow__direaction__' + direction] size && classes['arrow__size__' + size])}
+      className={css(classes.arrow, classes['arrow__direaction__' + direction], size && classes['arrow__size__' + size])}
       onClick={onClick}
       onTouchEnd={onClick}
       {...props}
@@ -27,6 +27,12 @@ Arrow.propTypes = {
   icon: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   size: PropTypes.oneOf(['medium', 'small']).isRequired,
+}
+Arrow.defaultProps = {
+  size: 'medium',
+}
+Arrow.contextTypes = {
+  theme: PropTypes.object.isRequired,
 }
 const defaultStyles = {
   arrow: {
@@ -54,6 +60,8 @@ const defaultStyles = {
       width: 70,
     }
   },
+
+  // direciton
   arrow__size__right: {
     right: defaults.container.gutter.horizontal,
   },
@@ -61,3 +69,5 @@ const defaultStyles = {
     left: defaults.container.gutter.horizontal,
   }
 }
+
+export default Arrow
