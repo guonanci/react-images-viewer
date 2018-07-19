@@ -52,11 +52,123 @@ const theme = {
   // container
   container: {
     background: 'rgba(255, 255, 255, .9)'
+  },
+
+  // arrows
+  arrow: {
+    backgroundColor: 'rgba(255, 255, 255, .8)',
+    fill: '#222',
+    opacity: .6,
+    transition: 'opacity 200ms',
+
+    ':hover': {
+      opacity: 1,
+    }
+  },
+  arrow__size__medium: {
+    borderRadius: 40,
+    height: 40,
+    marginTop: -20,
+
+    '@media (min-width: 768px)': {
+      height: 70,
+      padding: 15,
+    }
+  },
+  arrow__direction__left: { marginLeft: 10 },
+  arrow__direction__right: { marginRight: 10 },
+  close: {
+    fill: '#d40000',
+    opacity: .6,
+    transition: 'all 200ms',
+    ':hover': {
+      opacity: 1
+    }
+  },
+
+  // footer
+  footer: {
+    color: '#000'
+  },
+  footerCount: {
+    color: 'rgba(0, 0, 0, .6)'
+  },
+
+  // thumbnails
+  thumbnail:{
+
+  },
+  thumbnail__active: {
+    boxShadow: '0 0 0 2px #00d8ff'
   }
-}
-React.render(
+};
+
+render(
   <div>
-    <Standard imgs={imgs} />
+    <div>
+      <p>照片均来自
+        <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">Unsplash</a>.
+        采用以下键盘按钮来导航：
+        <kbd>向上，向左（上一张）</kbd> <kbd>向下，向右（下一张）</kbd> <kbd>空格，Esc（关闭）</kbd> &mdash;
+        你也可以尝试改变一下浏览器窗口大小~
+      </p>
+    </div>
+    <h3>默认选项</h3>
+    <Gallery
+      images={DEFAULT_IMAGES.map(({ caption, id, orientation, useForDemo }) => ({
+        srd: makeUnsplashSrc(id),
+        thumnail: makeUnsplashThumbnail(id, orientation),
+        srcSet: [
+          makeUnsplashSrcSet(id, 1024),
+          makeUnsplashSrcSet(id, 800),
+          makeUnsplashSrcSet(id, 500),
+          makeUnsplashSrcSet(id, 320)
+        ],
+        caption,
+        orientation,
+        useForDemo,
+      }))}
+    />
+
+    <h3>夹带缩略图</h3>
+    <Gallery
+      images={THUMBNAIL_IMAGES.map(({ caption, id, orientation, useForDemo }) => ({
+        srd: makeUnsplashSrc(id),
+        thumnail: makeUnsplashThumbnail(id, orientation),
+        srcSet: [
+          makeUnsplashSrcSet(id, 1024),
+          makeUnsplashSrcSet(id, 800),
+          makeUnsplashSrcSet(id, 500),
+          makeUnsplashSrcSet(id, 320)
+        ],
+        caption,
+        orientation,
+        useForDemo,
+      }))}
+      showThumbnails
+    />
+
+    <h3>主题可定制</h3>
+    <Gallery
+      images={THEMED_IMAGES.map(({ caption, id, orientation, useForDemo }) => ({
+        srd: makeUnsplashSrc(id),
+        thumnail: makeUnsplashThumbnail(id, orientation),
+        srcSet: [
+          makeUnsplashSrcSet(id, 1024),
+          makeUnsplashSrcSet(id, 800),
+          makeUnsplashSrcSet(id, 500),
+          makeUnsplashSrcSet(id, 320)
+        ],
+        caption,
+        orientation,
+        useForDemo,
+      }))}
+      theme={theme}
+      spinner={CustomSpinner}
+      spinnerColor={'#d40000'}
+      spinnerSize={150}
+      showThumbnails
+    />
   </div>,
   document.getElementById('example')
 )

@@ -4,16 +4,27 @@
 
 // Constans
 // example site
-@heading-color:       black;
-@text-color:          #333;
-@link-color:          #007eff;
-@gutter:                30px;
+@gutter:							20px;
+@table-cell-gutter: 	10px;
+@left-col-width:      180px;
+@heading-color:     #000;
+
+@kbd-bg-color:			#fafafa;
+@kbd-border-color:	#ccc;
+
+@link-color:        #00d7ff;
+@text-color:        #333;
+
+@gutter:              30px;
+@nav-gutter:					5px;
+@nav-padding: @nav-gutter - @nav-item-padding;
 
 
-
+// Base
 body {
+	background-color: '#fff';
   color: @text-color;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: 'Misrosoft Yahei', Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.4;
   margin: 0;
@@ -27,11 +38,17 @@ a {
     text-decoration: underline;
   }
 }
+hr {
+	border: none;
+	border-top: 1px solid rgba(0, 0, 0, .1);
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
 
 .container {
-  margin-left: auto;
   margin-right: auto;
-  min-width: 400px;
+  margin-left: auto;
+  max-width: 940px;
   padding: 0 @gutter;
 }
 
