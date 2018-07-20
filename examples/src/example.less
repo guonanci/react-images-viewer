@@ -52,8 +52,31 @@ hr {
   padding: 0 @gutter;
 }
 
+// Columns
+.left-col {
+	display: none;
+	float: left;
+	position: fixed;
+	width: @left-col-width;
+	z-index: 1;
+}
 
-// headings
+// Navigation
+.page-nav {
+	list-style: none;
+	margin: 0;
+	padding: 0 @nav-padding 0 0;
+	text-align: right;
+}
+.page-nav__item {
+
+}
+.page-nav__link {
+	display: block;
+	padding: @nav-item-padding;
+}
+
+// Headings
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: @heading-color;
