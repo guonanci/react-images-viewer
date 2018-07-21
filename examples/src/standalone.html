@@ -1,0 +1,92 @@
+<!doctype html>
+<head>
+  <meta charset="UTF-8">
+  <title>React-Images-Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scable=no, maximum-scale=1, width=device-width">
+  <meta name="keywords" content="react,reactjs,react component,imgsViewer,react images,react-images,react images viewer,react photos,react photos list,react-images-viewer,ui,javascript">
+  <meta name="description" content="A react library that view photos list easily, and a simple, responsive imgsViewer component for display an array of images">
+  <meta name="og:locale" content="zh-cn">
+  <meta property="og:title" content="React-Images">
+  <meta property="og:description" content="A simple, responsive Lightbox component for displaying an array of images.">
+  <meta property="og:url" content="https://guonanci.github.io/react-images-viewer">
+  <meta property="og:site_name" content="React-Images-Viewer">
+  <meta property="og:type" content="article">
+  <link rel="stylesheet" href="example.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+  <div class="page-wrapper">
+    <div id="app">
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" charset="utf-8"></script>
+  <script src="https://unpkg.com/react@15.6.1/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.6.1/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/prop-types@15.5.10/prop-types.js"></script>
+  <script src="https://unpkg.com/aphrodite/dist/aphrodite.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-transition-group/1.1.3/react-transition-group.js"></script>
+  <script src="https://unpkg.com/react-photo-gallery@6.0.13/dist/react-photo-gallery.min.js"></script>
+  <script src="https://rawgit.com/neptunian/react-scrolllock/master/dist/react-scrolllock.min.js"></script>
+  <script src="https://unpkg.com/react-images-viewer@1.0.0/dist/react-images-viewer.min.js"></script>
+  <script type="text/babel">
+    const photos = [
+      { src: 'https://images.unsplash.com/photo-1526784725085-c69e947bf92e?w=1024&h=1024', width:1, height:1 },
+      { src: 'https://images.unsplash.com/photo-1522985225914-17a10a58c8ec?w=1024&h=1024', width:1, height:1 },
+      { src: 'https://images.unsplash.com/photo-1522931698295-e7b4d3e4188f?w=1024&h=1024', width:1, height:1 },
+      { src: 'https://images.unsplash.com/photo-1516175663209-ac2459a5652f?w=1024&h=1024', width:1, height:1 },
+      { src: 'https://images.unsplash.com/photo-1515911601378-97de98db6dda?w=1024&h=1024', width:1, height:1 },
+    ]
+    class App extends React.Component {
+      constructor () {
+        super()
+        this.state = {
+          currImg: 0
+        }
+        this.closeImgsViewer = this.closeImgsViewer.bind(this)
+        this.openViewer = this.openViewer.bind(this)
+        this.gotoNext = this.gotoNext.bind(this)
+        this.gotoPrev = this.gotoPrev.bind(this)
+      }
+      openViewer (event, obj) {
+        this.setState({
+          currImg: obj.index,
+          viewerIsOpen: true,
+        })
+      }
+      closeImgsViewer () {
+        this.setState({
+          currImg: 0,
+          viewerIsOpen: false,
+        })
+      }
+      gotoPrev () {
+        this.setState({
+          currImg: this.state.currImg - 1
+        })
+      }
+      gotoNext () {
+        this.setState({
+          currImg: this.state.currImg + 1
+        })
+      }
+      render () {
+        return (
+          <div>
+            <Gallery photos={photos} onClick={this.openViewer} />
+            <ImgsViewer
+              imgs={photos}
+              onClose={this.closeImgsViewer}
+              onClickPrev={this.gotoPrev}
+              onClickNext={this.gotoNext}
+              currImg={this.state.currImg}
+              isOpen={this.state.viewerIsOpen}
+            />
+          </div>
+        )
+      }
+    }
+  ReactDOM.render(<App />, document.getElementById('app'))
+  </script>
+</body>

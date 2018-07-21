@@ -3,7 +3,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import uglify from 'rollup-plugin-uglify'
 import { minify } from 'uglify-es'
 
-const name = 'Viewer'
+const name = 'ImgsViewer'
 const path = 'dist/react-images-viewer'
 const globals = {
   'prop-types': 'PropTypes',
@@ -31,7 +31,7 @@ const babelOptions = (production) => {
 
 export default [
   {
-    input: 'src/Viewer.js',
+    input: 'src/ImgsViewer.js',
     output: {
       file: path + '.es.js'
     },
@@ -39,7 +39,7 @@ export default [
     plugins: [babel(babelOptions(false))]
   },
   {
-    input: 'src/Viewer.js',
+    input: 'src/ImgsViewer.js',
     output: {
       name: name,
       file: path + '.js',

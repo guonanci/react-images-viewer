@@ -24,7 +24,7 @@ function normalizeSourceSet(data) {
   return sourceSet
 }
 
-class Viewer extends Component {
+class ImgsViewer extends Component {
   constructor (props) {
     super(props)
 
@@ -316,7 +316,8 @@ class Viewer extends Component {
   }
 }
 
-Viewer.propTypes = {
+ImgsViewer.propTypes = {
+  lang: PropTypes.string,
   backdropCloseable: PropTypes.bool,
   closeBtnTitle: PropTypes.string,
   currImg: PropTypes.number,
@@ -351,16 +352,17 @@ Viewer.propTypes = {
   thumbnailOffset: PropTypes.number,
   width: PropTypes.number,
 }
-Viewer.defaultProps = {
-  closeBtnTitle: '关闭（空格）',
+ImgsViewer.defaultProps = {
+  lang: 'zh_CN',
+  closeBtnTitle: '关闭（空格键）',
   currImg: 0,
   enableKeyboardInput: true,
   imgCountSeparator: ' / ',
-  leftArrowTitle: '上一张',
+  leftArrowTitle: '上一张（向左键）',
   onClickShowNextImg: true,
   preloadNextImg: true,
   preventScroll: true,
-  rightArrowTitle: '下一张',
+  rightArrowTitle: '下一张（向右键）',
   showCloseBtn: true,
   showImgCount: true,
   spinner: DefaultSpinner,
@@ -370,7 +372,7 @@ Viewer.defaultProps = {
   thumbnailOffset: 2,
   width: 1024,
 }
-Viewer.childContextTypes = {
+ImgsViewer.childContextTypes = {
   theme: PropTypes.object.isRequired,
 }
 
@@ -413,4 +415,4 @@ const defaultStyles = {
   }
 }
 
-export default Viewer
+export default ImgsViewer

@@ -3,19 +3,21 @@
 [![Build Status](https://travis-ci.org/guonanci/react-images-viewer.svg?branch=master)](https://travis-ci.org/guonanci/react-images-viewer)
 [![Coverage Status](https://coveralls.io/repos/github/guonanci/react-images-viewer/badge.svg?branch=master)](https://coveralls.io/github/guonanci/react-images-viewer?branch=master)
 
-A react library that view photos list easily, and a simple, responsive lightbox component for display an array of images
+A react library that view photos list easily, and a simple, responsive viewer component for displaying an array of images
+
+[中文文档](./README_CN.md)
 
 ## Quick start
 
 ```bash
-npm install react-images-viewer --save
+# recommended
+yarn add react-images-viewer
 ```
 
 or
 
 ```bash
-# recommended
-yarn add react-images-viewer
+npm install react-images-viewer --save
 ```
 
 ```jsx
@@ -28,10 +30,10 @@ export default class Demo extends React.Component {
       <ImgsViewer
         imgs={[{ src: 'http://example.com/img1.jpg' }, { src: 'http://example.com/img2.png' }]}
         closeBtnTitle='关闭'
-        isOpen={this.state.lightIsOpen}
+        isOpen={this.state.viewerIsOpen}
         onClickPrev={this.gotoPrevious}
         onClickNext={this.gotoNext}
-        onClose={this.closeLightbox}
+        onClose={this.closeViewer}
       />
     )
   }
@@ -55,14 +57,14 @@ Then open [`localhost:8000`](http://localhost:8000) in a browser.
 Example using srcSet:
 
 ```jsx
-<Lightbox
-  imgs={LIGHTBOX_IMG_SET}
+<ImgsViewer
+  imgs={IMG_SET}
   ...
->
+/>
 ```
 
 ```js
-const LIGHTBOX_IMG_SET = [
+const IMG_SET = [
   {
     src: 'http://example.com/img1.svg',
     caption: 'A forest',
@@ -75,7 +77,6 @@ const LIGHTBOX_IMG_SET = [
   },
   {
     src: 'http://example.com/img2.svg',
-    caption: 'A forest',
     srcSet: [
       'http://example.com/img2_1024.jpg 1024w',
       'http://example.com/img2_800.jpg 800w',
@@ -90,27 +91,28 @@ const LIGHTBOX_IMG_SET = [
 
 Property      | Type      | Default     | Description
 :-----------|:------------|:-------------|:-------------
-backdropCloseable | bool | false | Allow users to exit the lightbox by clicking the backdrop
-closeBtnTitle | str | ' Close(Esc) ' | Customize close esc title
-enableKeyboardInput | bool | true | Supports keyboard input - <code>esc</code>, <code>arrow left</code>, and <code>arrow right</code>
-initialIdx | num | 0 | The index of the image to display initially
-customCtrls | arr | undefined | An arr of elements to display as custom controls on the top of lightbox
-imgs | arr | undefined | Required. Arr of img objs See img opts table below
-imgsSeparator | str | ' of ' | Customize separator in the image count
-isOpen | bool | false | Whether or not the lightbox is displayed leftArrowTitle | str | ' Previous(left arrow key)' | Customize of left arrow title
-onClickPrev | func | undefined | Fired on request of the previous img
-onClickNext | func | undefined | Fired on request of the next img
-onClose | func | undefined | Handle closing of the lightbox
-onClickImg | func | undefined | Handle click on currImg
+backdropCloseable | bool | false | Allow users to exit the viewer by clicking the backdrop
+closeBtnTitle | str | '关闭（空格键）' | Customize close esc title
+enableKeyboardInput | bool | true | Supports keyboard input - <code>space, esc</code>, <code> arrow left, arrow up</code>, and <code>arrow right, arrow down</code>
+currImg | num | 0 | The index of the image to display initially
+customCtrls | arr | undefined | An array of elements to display as custom controls on the top of viewer
+imgs | arr | undefined | Required. Array of image objects, See img opts table below
+imgCountSeparator | str | ' / ' | Customize separator in the image count
+isOpen | bool | false | Whether or not the viewer is displayed leftArrowTitle | str | '上一张（左箭头）' | Customize of left arrow title
+onClickPrev | func | undefined | Fired on request of the previous image
+onClickNext | func | undefined | Fired on request of the next image
+onClose | func | undefined | Handle closing of the viewer
+onClickImg | func | undefined | Handle click on current image
 onClickThumbnail | func | undefined | Handle click on thumbnail
-preloadNextImg | bool | true | Preload the next available img whatever direction the user is navigating
-rightArrowTitle | str | 'Next(right arrow key)' | Customize right arrow title
-showCloseBtn | bool | true | Optionally display a close 'X' btn in top right corner
-showImgCount | bool | true | Optionally display img index, e.g., "2 of 20"
-width | number | 1024| Maximum width of the carousel; defaults to 1024px spinner | func | DefaultSpinner | Spinner component class
-spinnerColor | str | 'white' | Color of spinner
-spinnnerSize | num | 80 | Size of spinner
-preventAutoScroll | bool | true | Determines whether auto=scrolling is prevented
+preloadNextImg | bool | true | Whether to preload the next available image
+rightArrowTitle | str | '下一张（右箭头）' | Customize right arrow title
+showCloseBtn | bool | true | Optionally display a close 'X' button in top right corner
+showImgCount | bool | true | Optionally display image index, e.g., "2 of 20"
+width | number | 1024 | Maximum width of the carousel; defaults to 1024px
+spinner | func | DefaultSpinner | Spinner component class
+spinnerColor | str | '#fff' | Color of spinner
+spinnnerSize | num | 100 | Size of spinner
+preventAutoScroll | bool | true | Determines whether auto-scrolling is prevented
 
 ## Imgs Object
 
