@@ -12,7 +12,7 @@ function Arrow ({ direction, icon, onClick, size, ...props }, { theme, }) {
   return (
     <button
       type="button" // default: submit
-      className={css(classes.arrow, classes['arrow__direaction__' + direction], size && classes['arrow__size__' + size])}
+      className={css(classes.arrow, classes['arrow__direction__' + direction], size && classes['arrow__size__' + size])}
       onClick={onClick}
       onTouchEnd={onClick}
       {...props}
@@ -71,10 +71,10 @@ const defaultStyles = {
   },
 
   // direciton
-  arrow__size__right: {
+  arrow__direction__right: {
     right: defaults.container.gutter.horizontal,
   },
-  arrow__size__left: {
+  arrow__direction__left: {
     left: defaults.container.gutter.horizontal,
   }
 }

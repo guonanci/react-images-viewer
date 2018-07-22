@@ -1,11 +1,13 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'examples/src'),
   entry: {
     app: './app.js',
+    app_CN: './app_CN.js',
   },
   output: {
     path: path.resolve(__dirname, 'examples/dist'),
@@ -29,45 +31,35 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'less-loader',
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'less-loader'],
+        })
       },
       {
         test: /\.html$/,
         use: [{
           loader: 'html-loader',
-        }],
+        }]
       },
     ],
   },
   resolve: {
     alias: {
       'react-images-viewer': path.resolve(__dirname, 'src/ImgsViewer'),
-      utils: path.resolve(__dirname, 'src/utils'),
-    }
-  },
-  optimization: {
-    namedModules: true,
-    namedChunks: true,
-    splitChunks: {
-      name: 'common',
-      minChunks: 2,
     }
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'common.js',
+      minChunk: 2,
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: false,
       template: path.resolve(__dirname, 'examples/src/index.html')
-    })
+    }),
+    new ExtractTextPlugin('example.css'),
   ]
-}
+};

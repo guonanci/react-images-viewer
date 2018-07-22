@@ -15,8 +15,7 @@
 @link-color:        #00d7ff;
 @text-color:        #333;
 
-@gutter:              30px;
-@nav-gutter:					5px;
+@nav-gutter:					30px;
 @nav-item-padding: 5px;
 @nav-padding: @nav-gutter - @nav-item-padding;
 
@@ -120,10 +119,6 @@ h6, .h6 {
 .page-header {
 	padding: @gutter 0;
 
-
-	background-color: @link-color;
-	color: mix(white, @link-color, 75%);
-
 	p {
 		margin: 0;
 	}
@@ -153,7 +148,7 @@ h6, .h6 {
 .page-subheader {
 	background-color: mix(@link-color, white, 8%);
 	border-radius: 4px;
-	padding: @gutter 0;
+	padding: @gutter;
 }
 .page-subheader__button {
 	float: right;

@@ -106,12 +106,14 @@ const theme = {
 render(
   <div>
     <div>
-      <p>Photos courtesy of <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">Unsplash</a>.
-        Use your keyboard to navigate <kbd>left, up</kbd> <kbd>right, down</kbd> <kbd>space, esc</kbd> &mdash;
-        Also, try resizing your browser window.
+      <p>照片均来自
+        <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">Unsplash</a>.
+        采用以下键盘按钮来导航：
+        <kbd>向上，向左（上一张）</kbd> <kbd>向下，向右（下一张）</kbd> <kbd>空格，Esc（关闭）</kbd> &mdash;
+        你也可以尝试改变一下浏览器窗口大小~
       </p>
     </div>
-    <h3>Default Options</h3>
+    <h3>默认选项</h3>
     <Gallery
       imgs={DEFAULT_IMAGES.map(({ caption, id, orientation, useForDemo }) => ({
         src: makeUnsplashSrc(id),
@@ -128,7 +130,7 @@ render(
       }))}
     />
 
-    <h3>With Thumbnails</h3>
+    <h3>夹带缩略图</h3>
     <Gallery
       imgs={THUMBNAIL_IMAGES.map(({ caption, id, orientation, useForDemo }) => ({
         src: makeUnsplashSrc(id),
@@ -146,7 +148,7 @@ render(
       showThumbnails
     />
 
-    <h3>Themed ImgsViewer</h3>
+    <h3>主题可定制</h3>
     <Gallery
       imgs={THEMED_IMAGES.map(({ caption, id, orientation, useForDemo }) => ({
         src: makeUnsplashSrc(id),
@@ -168,5 +170,5 @@ render(
       showThumbnails
     />
   </div>,
-  document.getElementById('example')
+  document.getElementById('example-CN')
 )

@@ -26,8 +26,7 @@ class Gallery extends Component {
       isOpen: true,
     })
   }
-  closeImgsViewer (index, event) {
-    event.preventDefault()
+  closeImgsViewer () {
     this.setState({
       currImg: 0,
       isOpen: false,
@@ -65,7 +64,7 @@ class Gallery extends Component {
           key={i}
           onClick={(e) => this.openImgsViewer(i, e)}
         >
-          <img src={obj.thumbnail} clasName={css(classes.source)} />
+          <img src={obj.thumbnail} className={css(classes.source)} />
         </a>
       )
     })
@@ -83,14 +82,15 @@ class Gallery extends Component {
         {this.props.subheading && <p>{this.props.subheading}</p>}
         {this.renderGallery()}
         <ImgsViewer
+          backdropCloseable
           currImg={this.state.currImg}
           imgs={this.props.imgs}
           isOpen={this.state.isOpen}
-          onClickImg={this.handleclickImg}
+          onClickImg={this.handleClickImg}
           onClickNext={this.gotoNext}
           onClickPrev={this.gotoPrev}
           onClickThumbnail={this.gotoImg}
-          onClose={this.closeLightbox}
+          onClose={this.closeImgsViewer}
           preventScroll={this.props.preventScroll}
           showThumbnails={this.props.showThumbnails}
           spinner={this.props.spinner}
@@ -106,7 +106,7 @@ class Gallery extends Component {
 Gallery.displayName = 'Gallery'
 Gallery.propTypes = {
   preventScroll: PropTypes.bool,
-  spinner: PropTypes.element,
+  spinner: PropTypes.func,
   spinnerColor: PropTypes.string,
   spinnerSize: PropTypes.number,
   theme: PropTypes.object,
@@ -130,12 +130,12 @@ const classes = StyleSheet.create({
   },
 
   // anchor
-  thumnail: {
+  thumbnail: {
     boxSizing: 'border-box',
     display: 'block',
     float: 'left',
     lineHeight: 0,
-    paddingRight: gutter.smaill,
+    paddingRight: gutter.small,
     paddingBottom: gutter.small,
     overflow: 'hidden',
 
@@ -150,11 +150,11 @@ const classes = StyleSheet.create({
     width: '30%',
   },
   square: {
-    paddingBottom: 0,
+    paddingBottom: gutter.large,
     width: '40%',
 
     '@media (min-width: 500px)': {
-      paddingBottom: 0,
+      paddingBottom: gutter.large,
     }
   },
 

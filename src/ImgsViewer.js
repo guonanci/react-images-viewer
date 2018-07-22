@@ -48,7 +48,7 @@ class ImgsViewer extends Component {
   componentDidMount () {
     if (this.props.isOpen) {
       if (this.props.enableKeyboardInput) {
-        window.addEventListener('keyboard', this.handleKeyboardInput)
+        window.addEventListener('keydown', this.handleKeyboardInput)
       }
       if (typeof this.props.currImg === 'number') {
         this.preloadImg(this.props.currImg, this.handleImgLoaded)
@@ -74,7 +74,7 @@ class ImgsViewer extends Component {
 
     // add/remove event listeners
     if (!this.props.isOpen && nextProps.isOpen && nextProps.enableKeyboardInput) {
-      window.addEventListener('keyboard', this.handleKeyboardInput)
+      window.addEventListener('keydown', this.handleKeyboardInput)
     }
     if (!nextProps.isOpen && nextProps.enableKeyboardInput) {
       window.removeEventListener('keydown', this.handleKeyboardInput)
@@ -141,10 +141,10 @@ class ImgsViewer extends Component {
   }
   handleKeyboardInput (event) {
     const { keyCode } = event
-    if (keyCode === 37 || keyCode === 33) { // left, up
+    if (keyCode === 37 || keyCode === 33 || keyCode === 38) { // left, pageup, up
       this.gotoPrev(event)
       return true
-    } else if (keyCode === 39 || keyCode === 34) { // right, down
+    } else if (keyCode === 39 || keyCode === 34 || keyCode === 40) { // right, pagedown, down
       this.gotoNext(event)
       return true
     } else if (keyCode === 27 || keyCode === 32) { // esc, space
@@ -398,7 +398,7 @@ const defaultStyles = {
     transition: 'opacity .3s',
   },
   imgLoaded: {
-    opcaty: 1,
+    opacity: 1,
   },
   spinner: {
     position: 'absolute',

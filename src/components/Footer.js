@@ -20,7 +20,7 @@ function Footer ({ caption, countCurr, countSeparator, countTotal, showCount, ..
   return (
     <div className={css(classes.footer)} {...props}>
       {caption ? (
-        <figcaption className={css(classes.footerCaptioin)}>
+        <figcaption className={css(classes.footerCaption)}>
           {caption}
         </figcaption>
       ) : <span />}
@@ -41,7 +41,7 @@ Footer.contextTypes = {
 }
 
 const defaultStyles = {
-  foooter: {
+  footer: {
     boxSizing: 'border-box',
     color: defaults.footer.color,
     cursor: 'auto',
