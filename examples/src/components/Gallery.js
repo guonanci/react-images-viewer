@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ImgsViewer from 'react-images-viewer'
 import PropTypes from 'prop-types'
 import { css, StyleSheet } from 'aphrodite/no-important'
-import { CombineLatestSubscriber } from '../../../node_modules/rxjs/operators/combineLatest';
 
 class Gallery extends Component {
   constructor () {
@@ -81,6 +80,24 @@ class Gallery extends Component {
     return (
       <div>
         {this.props.heading && <h2>{this.props.heading}</h2>}
+        {this.props.subheading && <p>{this.props.subheading}</p>}
+        {this.renderGallery()}
+        <ImgsViewer
+          currImg={this.state.currImg}
+          imgs={this.props.imgs}
+          isOpen={this.state.isOpen}
+          onClickImg={this.handleclickImg}
+          onClickNext={this.gotoNext}
+          onClickPrev={this.gotoPrev}
+          onClickThumbnail={this.gotoImg}
+          onClose={this.closeLightbox}
+          preventScroll={this.props.preventScroll}
+          showThumbnails={this.props.showThumbnails}
+          spinner={this.props.spinner}
+          spinnerColor={this.props.spinnerColor}
+          spinnerSize={this.props.spinnerSize}
+          theme={this.props.theme}
+        />
       </div>
     )
   }
@@ -88,6 +105,11 @@ class Gallery extends Component {
 
 Gallery.displayName = 'Gallery'
 Gallery.propTypes = {
+  preventScroll: PropTypes.bool,
+  spinner: PropTypes.element,
+  spinnerColor: PropTypes.string,
+  spinnerSize: PropTypes.number,
+  theme: PropTypes.object,
   heading: PropTypes.string,
   imgs: PropTypes.array,
   showThumbnails: PropTypes.bool,
@@ -105,7 +127,7 @@ const classes = StyleSheet.create({
     '@media (min-width: 500px)': {
       marginRight: -gutter.large,
     }
-  }
+  },
 
   // anchor
   thumnail: {

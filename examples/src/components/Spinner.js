@@ -3,7 +3,7 @@ import React from 'react'
 import { css, StyleSheet } from 'aphrodite/no-important'
 
 const Spinner = (props) => {
-  const classes = StyleSheet.create(StyleSheet(props))
+  const classes = StyleSheet.create(styles(props))
 
   return (
     <div className={css(classes.spinner)}>
@@ -55,5 +55,10 @@ const styles = ({ color, size }) => ({
     borderRadius: '50%',
     background: color,
     animationName: squareKeyframes,
+    animationDuration: '2s',
+    animationTimingFunction: 'linear',
+    animationIterationCount: 'infinite',
   }
 })
+
+export default Spinner

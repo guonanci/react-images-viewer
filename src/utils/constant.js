@@ -1,2 +1,2 @@
 // obj
-const OBJ_KEYS = Object.keys
+export const OBJ_KEYS = Object.keys

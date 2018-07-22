@@ -60,6 +60,15 @@ const defaultStyles = {
       width: 70,
     }
   },
+  arrow__size__small: {
+    height: defaults.thumbnail.size,
+    marginTop: defaults.thumbnail.size / -2,
+    width: 30,
+
+    '@media (min-width: 500px)': {
+      width: 40,
+    },
+  },
 
   // direciton
   arrow__size__right: {

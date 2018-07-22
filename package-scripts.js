@@ -9,7 +9,7 @@ module.exports = {
       default: series(
         rimraf('dist'),
         rimraf('lib'),
-        concurrent
+        concurrent.nps('build.rollup', 'build.babel', 'build.less')
       ),
       rollup: 'rollup --config',
       babel: 'babel src -d lib',

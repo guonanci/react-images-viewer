@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'examples/src'),
@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'examples/dist'),
     filename: '[name].js',
-    publishPath: '/',
+    publicPath: '/',
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'examples/src'),
@@ -25,15 +25,16 @@ module.exports = {
         exclude: [/node_modules/],
         use: [{
           loader: 'babel-loader',
-          optioins: { presets: ['react', 'env'] },
+          options: { presets: ['react', 'env', 'stage-2'] },
         }],
       },
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'less-loader'],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader',
+        ],
       },
       {
         test: /\.html$/,
@@ -45,20 +46,29 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'react-images-viewer': path.resolve(__dirname, 'src/Viewer'),
+      'react-images-viewer': path.resolve(__dirname, 'src/ImgsViewer'),
+      utils: path.resolve(__dirname, 'src/utils'),
+    }
+  },
+  optimization: {
+    namedModules: true,
+    namedChunks: true,
+    splitChunks: {
+      name: 'common',
+      minChunks: 2,
     }
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      filename: 'common.js',
-      minChunk: 2,
-    })
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: false,
       template: path.resolve(__dirname, 'examples/src/index.html')
-    }),
-    new ExtractTextPlugin('example.css')
+    })
   ]
 }

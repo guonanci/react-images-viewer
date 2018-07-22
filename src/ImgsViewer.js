@@ -7,10 +7,10 @@ import defaultTheme from './theme'
 import Arrow from './components/Arrow'
 import Container from './components/Container'
 import Footer from './components/Footer'
-import Header from '/components/Header'
-import PaginatedThumbnails from '/components/PaginatedThumbnails'
-import Portal from '/components/Portal'
-import DefaultSpinner from '/components/Spinner'
+import Header from './components/Header'
+import PaginatedThumbnails from './components/PaginatedThumbnails'
+import Portal from './components/Portal'
+import DefaultSpinner from './components/Spinner'
 
 import { bindFunctions, canUseDom, deepMerge } from './utils/util'
 
@@ -168,7 +168,7 @@ class ImgsViewer extends Component {
       <Arrow
         direction="left"
         icon="arrowLeft"
-        onclick={this.gotoPrev}
+        onClick={this.gotoPrev}
         title={this.props.leftArrowTitle}
         type="button"
       />
