@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -16,7 +15,7 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'examples/src'),
     host: '0.0.0.0',
-    port: 8000,
+    port: 8001,
   },
   module: {
     rules: [
