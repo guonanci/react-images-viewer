@@ -47,7 +47,7 @@
   };theme.thumbnail = {
     activeBorderColor: '#fff',
     size: 50,
-    outter: 2
+    gutter: 2
 
     // arrow
   };theme.arrow = {
@@ -176,6 +176,7 @@
   }
 
   var arrowLeft = (function (fill) {
+  		return "<svg fill=\"" + fill + "\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"100%\" height=\"100%\" viewBox=\"0 0 512 512\" xml:space=\"preserve\">\n\t\t<path d=\"M213.7,256L213.7,256L213.7,256L380.9,81.9c4.2-4.3,4.1-11.4-0.2-15.8l-29.9-30.6c-4.3-4.4-11.3-4.5-15.5-0.2L131.1,247.9 c-2.2,2.2-3.2,5.2-3,8.1c-0.1,3,0.9,5.9,3,8.1l204.2,212.7c4.2,4.3,11.2,4.2,15.5-0.2l29.9-30.6c4.3-4.4,4.4-11.5,0.2-15.8 L213.7,256z\"/>\n\t</svg>";
   });
 
   var arrowRight = (function (fill) {
@@ -222,7 +223,7 @@
       'button',
       _extends({
         type: 'button' // default: submit
-        , className: noImportant.css(classes.arrow, classes['arrow__direaction__' + direction], size && classes['arrow__size__' + size]),
+        , className: noImportant.css(classes.arrow, classes['arrow__direction__' + direction], size && classes['arrow__size__' + size]),
         onClick: onClick,
         onTouchEnd: onClick
       }, props),
@@ -279,10 +280,10 @@
     },
 
     // direciton
-    arrow__size__right: {
+    arrow__direction__right: {
       right: theme.container.gutter.horizontal
     },
-    arrow__size__left: {
+    arrow__direction__left: {
       left: theme.container.gutter.horizontal
     }
   };
@@ -349,7 +350,7 @@
       _extends({ className: noImportant.css(classes.footer) }, props),
       caption ? React__default.createElement(
         'figcaption',
-        { className: noImportant.css(classes.footerCaptioin) },
+        { className: noImportant.css(classes.footerCaption) },
         caption
       ) : React__default.createElement('span', null),
       imgCount
@@ -368,7 +369,7 @@
   };
 
   var defaultStyles$2 = {
-    foooter: {
+    footer: {
       boxSizing: 'border-box',
       color: theme.footer.color,
       cursor: 'auto',
@@ -462,7 +463,7 @@
     var classes = noImportant.StyleSheet.create(deepMerge(defaultStyles$4, theme$$1));
 
     return React__default.createElement('div', {
-      className: noImportant.css(classes.thumnail, active && classes.thumbnail__active),
+      className: noImportant.css(classes.thumbnail, active && classes.thumbnail__active),
       onClick: function onClick(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -618,6 +619,8 @@
     }, {
       key: 'renderArrowPrev',
       value: function renderArrowPrev() {
+        var leftTitle = this.props.leftTitle;
+
         if (this.getFirst() <= 0) return null;
 
         return React__default.createElement(Arrow, {
@@ -626,21 +629,42 @@
           icon: 'arrowLeft',
           onClick: this.gotoPrev,
           style: arrowStyles,
-          title: '\u4E0B\u4E00\u5F20',
+          title: leftTitle,
+          type: 'button'
+        });
+      }
+    }, {
+      key: 'renderArrowNext',
+      value: function renderArrowNext() {
+        var _props3 = this.props,
+            offset = _props3.offset,
+            imgs = _props3.imgs,
+            rightTitle = _props3.rightTitle;
+
+        var totalCount = 2 * offset + 1;
+        if (this.getFirst() + totalCount >= imgs.length) return null;
+
+        return React__default.createElement(Arrow, {
+          direction: 'right',
+          size: 'small',
+          icon: 'arrowRight',
+          onClick: this.gotoNext,
+          style: arrowStyles,
+          title: rightTitle,
           type: 'button'
         });
       }
     }, {
       key: 'render',
       value: function render() {
-        var _props3 = this.props,
-            imgs = _props3.imgs,
-            currImg = _props3.currImg,
-            onClickThumbnail = _props3.onClickThumbnail,
-            offset = _props3.offset;
+        var _props4 = this.props,
+            imgs = _props4.imgs,
+            currImg = _props4.currImg,
+            onClickThumbnail = _props4.onClickThumbnail,
+            offset = _props4.offset;
 
 
-        var totalCount = 2 * offset + 1; // show $offset extra thumnails on each side
+        var totalCount = 2 * offset + 1; // show $offset extra thumbnails on each side
         var thumbnails = [];
         var baseOffset = 0;
         if (imgs.length <= totalCount) {
@@ -660,7 +684,7 @@
               key: baseOffset + idx
             }, img, {
               index: baseOffset + idx,
-              onclick: onClickThumbnail,
+              onClick: onClickThumbnail,
               active: baseOffset + idx === currImg
             }));
           }),
@@ -673,6 +697,8 @@
 
 
   PaginatedThumbnails.propTypes = {
+    leftTitle: PropTypes.string,
+    rightTitle: PropTypes.string,
     currImg: PropTypes.number,
     imgs: PropTypes.array,
     offset: PropTypes.number,
@@ -871,7 +897,7 @@
       value: function componentDidMount() {
         if (this.props.isOpen) {
           if (this.props.enableKeyboardInput) {
-            window.addEventListener('keyboard', this.handleKeyboardInput);
+            window.addEventListener('keydown', this.handleKeyboardInput);
           }
           if (typeof this.props.currImg === 'number') {
             this.preloadImg(this.props.currImg, this.handleImgLoaded);
@@ -899,7 +925,7 @@
 
         // add/remove event listeners
         if (!this.props.isOpen && nextProps.isOpen && nextProps.enableKeyboardInput) {
-          window.addEventListener('keyboard', this.handleKeyboardInput);
+          window.addEventListener('keydown', this.handleKeyboardInput);
         }
         if (!nextProps.isOpen && nextProps.enableKeyboardInput) {
           window.removeEventListener('keydown', this.handleKeyboardInput);
@@ -982,12 +1008,12 @@
       value: function handleKeyboardInput(event) {
         var keyCode = event.keyCode;
 
-        if (keyCode === 37 || keyCode === 33) {
-          // left, up
+        if (keyCode === 37 || keyCode === 33 || keyCode === 38) {
+          // left, pageup, up
           this.gotoPrev(event);
           return true;
-        } else if (keyCode === 39 || keyCode === 34) {
-          // right, down
+        } else if (keyCode === 39 || keyCode === 34 || keyCode === 40) {
+          // right, pagedown, down
           this.gotoNext(event);
           return true;
         } else if (keyCode === 27 || keyCode === 32) {
@@ -1046,7 +1072,7 @@
 
         if (!isOpen) return React__default.createElement('span', { key: 'closed' });
 
-        var offsetThumbnails = showThumbnails ? this.theme.thumnail.size + this.theme.container.gutter.vertical : 0;
+        var offsetThumbnails = showThumbnails ? this.theme.thumbnail.size + this.theme.container.gutter.vertical : 0;
 
         return React__default.createElement(
           Container,
@@ -1090,7 +1116,7 @@
         var sourceSet = normalizeSourceSet(img);
         var sizes = sourceSet ? '100vw' : null;
 
-        var thumbnailsSize = showThumbnails ? this.theme.thumnail.size : 0;
+        var thumbnailsSize = showThumbnails ? this.theme.thumbnail.size : 0;
         var heightOffset = this.theme.header.height + this.theme.footer.height + thumbnailsSize + this.theme.container.gutter.vertical + 'px';
 
         return React__default.createElement(
@@ -1116,6 +1142,8 @@
         var _props4 = this.props,
             imgs = _props4.imgs,
             currImg = _props4.currImg,
+            leftArrowTitle = _props4.leftArrowTitle,
+            rightArrowTitle = _props4.rightArrowTitle,
             onClickThumbnail = _props4.onClickThumbnail,
             showThumbnails = _props4.showThumbnails,
             thumbnailOffset = _props4.thumbnailOffset;
@@ -1124,10 +1152,12 @@
         if (!showThumbnails) return null;
 
         return React__default.createElement(PaginatedThumbnails, {
+          leftTitle: leftArrowTitle,
+          rightTitle: rightArrowTitle,
           currImg: currImg,
           imgs: imgs,
           offset: thumbnailOffset,
-          onClickThumnail: onClickThumbnail
+          onClickThumbnail: onClickThumbnail
         });
       }
     }, {
@@ -1212,7 +1242,7 @@
       src: PropTypes.string.isRequired,
       srcSet: PropTypes.array,
       caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-      thumnail: PropTypes.string
+      thumbnail: PropTypes.string
     })).isRequired,
     isOpen: PropTypes.bool,
     leftArrowTitle: PropTypes.string,
@@ -1280,7 +1310,7 @@
       transition: 'opacity .3s'
     },
     imgLoaded: {
-      opcaty: 1
+      opacity: 1
     },
     spinner: {
       position: 'absolute',

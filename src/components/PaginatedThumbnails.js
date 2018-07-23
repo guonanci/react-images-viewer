@@ -94,6 +94,7 @@ export default class PaginatedThumbnails extends Component {
   // ====================
 
   renderArrowPrev () {
+    const { leftTitle } = this.props
     if (this.getFirst() <= 0) return null
 
     return (
@@ -103,7 +104,24 @@ export default class PaginatedThumbnails extends Component {
         icon="arrowLeft"
         onClick={this.gotoPrev}
         style={arrowStyles}
-        title="下一张"
+        title={leftTitle}
+        type="button"
+      />
+    )
+  }
+  renderArrowNext () {
+    const { offset, imgs, rightTitle } = this.props
+    const totalCount = 2 * offset + 1
+    if (this.getFirst() + totalCount >= imgs.length) return null
+
+    return (
+      <Arrow
+        direction="right"
+        size="small"
+        icon="arrowRight"
+        onClick={this.gotoNext}
+        style={arrowStyles}
+        title={rightTitle}
         type="button"
       />
     )
@@ -111,7 +129,7 @@ export default class PaginatedThumbnails extends Component {
   render () {
     const { imgs, currImg, onClickThumbnail, offset } = this.props
 
-    const totalCount = 2 * offset + 1 // show $offset extra thumnails on each side
+    const totalCount = 2 * offset + 1 // show $offset extra thumbnails on each side
     let thumbnails = []
     let baseOffset = 0
     if (imgs.length <= totalCount) {
@@ -129,7 +147,7 @@ export default class PaginatedThumbnails extends Component {
             key={baseOffset + idx}
             {...img}
             index={baseOffset + idx}
-            onclick={onClickThumbnail}
+            onClick={onClickThumbnail}
             active={baseOffset + idx === currImg}
           />
         ))}
@@ -140,6 +158,8 @@ export default class PaginatedThumbnails extends Component {
 }
 
 PaginatedThumbnails.propTypes = {
+  leftTitle: PropTypes.string,
+  rightTitle: PropTypes.string,
   currImg: PropTypes.number,
   imgs: PropTypes.array,
   offset: PropTypes.number,

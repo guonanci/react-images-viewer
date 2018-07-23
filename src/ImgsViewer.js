@@ -194,7 +194,7 @@ class ImgsViewer extends Component {
 
     if (!isOpen) return <span key="closed" />
 
-    const offsetThumbnails = showThumbnails ? this.theme.thumnail.size + this.theme.container.gutter.vertical : 0
+    const offsetThumbnails = showThumbnails ? this.theme.thumbnail.size + this.theme.container.gutter.vertical : 0
 
     return (
       <Container
@@ -228,7 +228,7 @@ class ImgsViewer extends Component {
     const sourceSet = normalizeSourceSet(img)
     const sizes = sourceSet ? '100vw' : null
 
-    const thumbnailsSize = showThumbnails ? this.theme.thumnail.size : 0
+    const thumbnailsSize = showThumbnails ? this.theme.thumbnail.size : 0
     const heightOffset = `${this.theme.header.height + this.theme.footer.height + thumbnailsSize + (this.theme.container.gutter.vertical)}px`
 
     return (
@@ -252,16 +252,18 @@ class ImgsViewer extends Component {
     )
   }
   renderThumbnails () {
-    const { imgs, currImg, onClickThumbnail, showThumbnails, thumbnailOffset } = this.props
+    const { imgs, currImg, leftArrowTitle, rightArrowTitle, onClickThumbnail, showThumbnails, thumbnailOffset } = this.props
 
     if (!showThumbnails) return null
 
     return (
       <PaginatedThumbnails
+        leftTitle={leftArrowTitle}
+        rightTitle={rightArrowTitle}
         currImg={currImg}
         imgs={imgs}
         offset={thumbnailOffset}
-        onClickThumnail={onClickThumbnail}
+        onClickThumbnail={onClickThumbnail}
       />
     )
   }
@@ -329,7 +331,7 @@ ImgsViewer.propTypes = {
       src: PropTypes.string.isRequired,
       srcSet: PropTypes.array,
       caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-      thumnail: PropTypes.string
+      thumbnail: PropTypes.string
     })
   ).isRequired,
   isOpen: PropTypes.bool,

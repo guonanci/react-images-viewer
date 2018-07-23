@@ -11,7 +11,7 @@ function Thumbnail ({ index, src, thumbnail, active, onClick }, { theme }) {
 
   return (
     <div
-      className={css(classes.thumnail, active && classes.thumbnail__active)}
+      className={css(classes.thumbnail, active && classes.thumbnail__active)}
       onClick={(e) => {
         e.preventDefault()
         e.stopPropagation()

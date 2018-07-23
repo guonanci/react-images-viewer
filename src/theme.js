@@ -40,7 +40,7 @@ theme.footer = {
 theme.thumbnail = {
   activeBorderColor: '#fff',
   size: 50,
-  outter: 2,
+  gutter: 2,
 }
 
 // arrow
