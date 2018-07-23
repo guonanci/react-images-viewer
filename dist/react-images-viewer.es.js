@@ -729,8 +729,7 @@ var PassContext = function (_Component) {
 }(Component);
 
 PassContext.propTypes = {
-  context: PropTypes.object.isRequired,
-  children: PropTypes.element
+  context: PropTypes.object.isRequired
 };
 PassContext.childContextTypes = {
   theme: PropTypes.object
