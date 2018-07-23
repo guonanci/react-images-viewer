@@ -60,6 +60,11 @@ module.exports = {
       inject: false,
       template: path.resolve(__dirname, 'examples/src/index.html')
     }),
+    new HtmlWebpackPlugin({
+      filename: 'index_CN.html',
+      inject: false,
+      template: path.resolve(__dirname, 'examples/src/index_CN.html')
+    }),
     new ExtractTextPlugin('example.css'),
   ]
 };
