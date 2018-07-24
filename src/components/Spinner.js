@@ -6,8 +6,10 @@ const Spinner = props => {
   const classes = StyleSheet.create(styles(props))
 
   return (
-    <div className={css(classes.spinner)}>
-      <div className={css(classes.ripple)} />
+    <div className={css(classes.bouncingLoader)}>
+      <div className={css(classes.child)} />
+      <div className={css(classes.child, classes.child2)} />
+      <div className={css(classes.child, classes.child3)} />
     </div>
   )
 }
@@ -17,39 +19,38 @@ Spinner.propTypes = {
   size: PropTypes.number,
 }
 
-const rippleKeyframes = {
+const bouncingKeyframes = (size) => ({
   '0%': {
-    top: '50%',
-    left: '50%',
-    width: 0,
-    height: 0,
     opacity: 1,
+    transform: 'translateY(0)',
   },
   '100%': {
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    opacity: 0
+    opacity: .1,
+    transform: `translateY(-${size}px)`,
   }
-}
+})
 
 const styles = ({ color, size }) => ({
-  spinner: {
-    display: 'inline-block',
-    position: 'relative',
+  bouncingLoader: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  child: {
     width: size,
     height: size,
-  },
-  ripple: {
-    position: 'absolute',
-    border: `4px solid ${color}`,
-    opacity: 1,
+    margin: `${3 * size}px ${ .2 * size}px`,
+    background: color,
     borderRadius: '50%',
-    animationName: rippleKeyframes,
-    animationDuration: '1s',
-    animationTimingFunctions: 'cubic-bezier(0, .2, .8, 1)',
+    animationName: bouncingKeyframes(size),
+    animationDuration: '.6s',
+    animationDirection: 'alternate',
     animationIterationCount: 'infinite',
+  },
+  child2: {
+    animationDelay: '0.2s',
+  },
+  child3: {
+    animationDelay: '0.4s',
   }
 })
 

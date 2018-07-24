@@ -10,9 +10,7 @@
     "start": "webpack-dev-server --progress",
     "lint": "eslint src/** examples/src/app.js examples/src/components/Gallery.js",
     "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec --colors test/*",
-    "coveralls": "cat ./coverage/lcov/lcov.info | ./node_modules/.bin/coveralls",
-    "coverage-old": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --reporter spec test/*",
-    "coverage": "cat ./coverage/lcov.info | coveralls"
+    "coverage": "cat ./coverage/lcov/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",

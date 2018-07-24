@@ -369,7 +369,7 @@ ImgsViewer.defaultProps = {
   showImgCount: true,
   spinner: DefaultSpinner,
   spinnerColor: '#fff',
-  spinnerSize: 100,
+  spinnerSize: 50,
   theme: {},
   thumbnailOffset: 2,
   width: 1024,

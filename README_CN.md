@@ -111,8 +111,8 @@ showCloseBtn | 布尔值 | true | 右上角是否显示 X 按钮
 showImgCount | 布尔值 | true | 是否显示图片索引
 width | 数值类型 | 1024| 轮播器的最大的宽度，默认值1024px
 spinner | 函数 | DefaultSpinner | 加载器组件
-spinnerColor | 字符串 | 'white' | 加载器颜色
-spinnnerSize | 数值类型 | 80 | 加载器尺寸
+spinnerColor | 字符串 | '#fff' | 加载器颜色
+spinnnerSize | 数值类型 | 50 | 加载器尺寸
 preventAutoScroll | 布尔值 | true | 是否阻止自动滚动
 
 ## Imgs Object

@@ -112,7 +112,7 @@ showImgCount | bool | true | Optionally display image index, e.g., "2 of 20"
 width | number | 1024 | Maximum width of the carousel; defaults to 1024px
 spinner | func | DefaultSpinner | Spinner component class
 spinnerColor | str | '#fff' | Color of spinner
-spinnnerSize | num | 100 | Size of spinner
+spinnnerSize | num | 50 | Size of spinner
 preventAutoScroll | bool | true | Determines whether auto-scrolling is prevented
 
 ## Imgs Object
