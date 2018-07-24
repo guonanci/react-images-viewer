@@ -304,7 +304,7 @@ Container.contextTypes = {
 
 var defaultStyles$1 = {
   container: {
-    alighItems: 'center',
+    alignItems: 'center',
     backdropColor: theme.container.background,
     boxSizing: 'border-box',
     display: 'flex',
