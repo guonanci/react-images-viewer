@@ -19,9 +19,10 @@ module.exports = {
     },
     publish: {
       default: series(
-        rimraf('examples/dist'),
+        rimraf('g/dist'),
         'webpack --progress -p',
-        'git subtree push --prefix examples/dist origin gh-pages'
+        // 'git pull',
+        'git push origin `git subtree split --prefix examples/dist gh-pages`:gh-pages --force'
       )
     }
   }
