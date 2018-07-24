@@ -1,6 +1,6 @@
 {
   "name": "react-images-viewer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Create an react-images-viewer component.",
   "main": "lib/Viewer.js",
   "jsnext:main": "dist/react-images-viewer.es.js",
