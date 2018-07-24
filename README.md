@@ -100,9 +100,9 @@ imgs | arr | undefined | Required. Array of image objects, See img opts table be
 imgCountSeparator | str | ' / ' | Customize separator in the image count
 isOpen | bool | false | Required if you want to navigate the imgsViewer, Whether or not the viewer is displayed
 leftArrowTitle | str | '上一张（左箭头）' | Customize of left arrow title
-onClickPrev | func | undefined | Required if you want to navigate the imgsViewer, Fired on request of the previous image
-onClickNext | func | undefined | Required if you want to navigate the imgsViewer, Fired on request of the next image
-onClose | func | undefined | Required if you want to close the imgsViewer, Handle closing of the viewer
+onClickPrev | func | undefined | Required if you want to navigate the imgsViewer, and fired on request of the previous image
+onClickNext | func | undefined | Required if you want to navigate the imgsViewer, and fired on request of the next image
+onClose | func | undefined | Required if you want to close the imgsViewer, and handle closing of the viewer
 onClickImg | func | undefined | Handle click on current image
 onClickThumbnail | func | undefined | Handle click on thumbnail
 preloadNextImg | bool | true | Whether to preload the next available image
