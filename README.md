@@ -29,7 +29,7 @@ export default class Demo extends React.Component {
     return (
       <ImgsViewer
         imgs={[{ src: 'http://example.com/img1.jpg' }, { src: 'http://example.com/img2.png' }]}
-        closeBtnTitle='关闭'
+        currImg={this.state.currImg}
         isOpen={this.state.viewerIsOpen}
         onClickPrev={this.gotoPrevious}
         onClickNext={this.gotoNext}
@@ -94,14 +94,15 @@ Property      | Type      | Default     | Description
 backdropCloseable | bool | false | Allow users to exit the viewer by clicking the backdrop
 closeBtnTitle | str | '关闭（空格键）' | Customize close esc title
 enableKeyboardInput | bool | true | Supports keyboard input - <code>space, esc</code>, <code> arrow left, arrow up</code>, and <code>arrow right, arrow down</code>
-currImg | num | 0 | The index of the image to display initially
+currImg | num | 0 | Required if you want to navigate the imgsViewer, The index of the image to display initially
 customCtrls | arr | undefined | An array of elements to display as custom controls on the top of viewer
 imgs | arr | undefined | Required. Array of image objects, See img opts table below
 imgCountSeparator | str | ' / ' | Customize separator in the image count
-isOpen | bool | false | Whether or not the viewer is displayed leftArrowTitle | str | '上一张（左箭头）' | Customize of left arrow title
-onClickPrev | func | undefined | Fired on request of the previous image
-onClickNext | func | undefined | Fired on request of the next image
-onClose | func | undefined | Handle closing of the viewer
+isOpen | bool | false | Required if you want to navigate the imgsViewer, Whether or not the viewer is displayed
+leftArrowTitle | str | '上一张（左箭头）' | Customize of left arrow title
+onClickPrev | func | undefined | Required if you want to navigate the imgsViewer, Fired on request of the previous image
+onClickNext | func | undefined | Required if you want to navigate the imgsViewer, Fired on request of the next image
+onClose | func | undefined | Required if you want to close the imgsViewer, Handle closing of the viewer
 onClickImg | func | undefined | Handle click on current image
 onClickThumbnail | func | undefined | Handle click on thumbnail
 preloadNextImg | bool | true | Whether to preload the next available image
