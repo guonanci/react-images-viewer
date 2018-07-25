@@ -1,9 +1,9 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development',
   context: path.resolve(__dirname, 'examples/src'),
   entry: {
     app: './app.js',
@@ -31,10 +31,13 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'less-loader'],
-        })
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+          'less-loader',
+        ],
       },
       {
         test: /\.html$/,
@@ -49,12 +52,24 @@ module.exports = {
       'react-images-viewer': path.resolve(__dirname, 'src/ImgsViewer'),
     }
   },
+  optimization: {
+    splitChunks: {
+      name: true,
+      cacheGroups: {
+        common: {
+          name: 'common',
+          // filename: 'common.js',
+          minChunks: 2,
+        }
+      }
+    }
+  },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      filename: 'common.js',
-      minChunk: 2,
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'common',
+    //   filename: 'common.js',
+    //   minChunk: 2,
+    // }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: false,
@@ -65,6 +80,6 @@ module.exports = {
       inject: false,
       template: path.resolve(__dirname, 'examples/src/index_CN.html')
     }),
-    new ExtractTextPlugin('example.css'),
+    new MiniCssExtractPlugin({ filename: '[name].css', chunkFilename: '[id].css' }),
   ]
 };
