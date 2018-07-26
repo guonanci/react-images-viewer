@@ -55,14 +55,19 @@ class ImgsViewer extends Component {
       }
     }
   }
+  // static getDerivedStateFromProps (nextProps, prevState) {
   UNSAFE_componentWillReceiveProps (nextProps) {
     if (!canUseDom) return
+
+    // const instance = this
 
     // always to preload imgs with both directions
     // then when user changs direction, img also show quickly
     if (nextProps.preloadNextImg) {
       const nextIdx = nextProps.currImg + 1
       const prevIdx = nextProps.currImg - 1
+      // debugger
+      // if (!this) return null
       this.preloadImg(prevIdx)
       this.preloadImg(nextIdx)
     }
@@ -79,8 +84,13 @@ class ImgsViewer extends Component {
     if (!nextProps.isOpen && nextProps.enableKeyboardInput) {
       window.removeEventListener('keydown', this.handleKeyboardInput)
     }
+
+    return null
   }
-  UNSAFE_componentWillUnmount () {
+  componentDidUpdate (prevProps, prevState, snapshot) {
+
+  }
+  componentWillUnmount () {
     if (this.props.enableKeyboardInput) {
       window.removeEventListener('keydown', this.handleKeyboardInput)
     }

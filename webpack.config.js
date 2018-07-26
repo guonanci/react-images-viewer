@@ -8,6 +8,9 @@ module.exports = {
   entry: {
     app: './app.js',
     app_CN: './app_CN.js',
+    common: [
+      'react-images-viewer'
+    ]
   },
   output: {
     path: path.resolve(__dirname, 'examples/dist'),
@@ -32,9 +35,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader',
         ],
@@ -55,21 +56,18 @@ module.exports = {
   optimization: {
     splitChunks: {
       name: true,
+      // filename: 'common.js',
+      // minChunks: 2,
       cacheGroups: {
         common: {
+          test: /[\\/]node_modules[\\/]/,
           name: 'common',
-          // filename: 'common.js',
-          minChunks: 2,
+          chunks: 'all'
         }
       }
     }
   },
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'common',
-    //   filename: 'common.js',
-    //   minChunk: 2,
-    // }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: false,
@@ -80,6 +78,6 @@ module.exports = {
       inject: false,
       template: path.resolve(__dirname, 'examples/src/index_CN.html')
     }),
-    new MiniCssExtractPlugin({ filename: '[name].css', chunkFilename: '[id].css' }),
+    new MiniCssExtractPlugin({ filename: 'example.css', chunkFilename: 'example.css' }),
   ]
 };
