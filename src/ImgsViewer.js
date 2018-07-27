@@ -24,12 +24,14 @@ function normalizeSourceSet(data) {
   return sourceSet
 }
 
+const ThemeContext = React.createContext(defaultTheme)
+
 class ImgsViewer extends Component {
   constructor (props) {
     super(props)
 
-    this.theme = deepMerge(defaultTheme, this.theme)
-    this.classes = StyleSheet.create(deepMerge(defaultStyles, this.theme))
+    this.theme = deepMerge(defaultTheme, this.props.theme)
+    this.classes = StyleSheet.create(deepMerge(defaultStyles, this.props.theme))
     this.state = { imgLoaded: false }
 
     bindFunctions.call(this, [
@@ -39,11 +41,6 @@ class ImgsViewer extends Component {
       'handleKeyboardInput',
       'handleImgLoaded'
     ])
-  }
-  getChildContext () {
-    return {
-      theme: this.theme
-    }
   }
   componentDidMount () {
     if (this.props.isOpen) {
@@ -86,9 +83,6 @@ class ImgsViewer extends Component {
     }
 
     return null
-  }
-  componentDidUpdate (prevProps, prevState, snapshot) {
-
   }
   componentWillUnmount () {
     if (this.props.enableKeyboardInput) {
@@ -171,11 +165,12 @@ class ImgsViewer extends Component {
   // Renderers
   // ====================
 
-  renderArrowPrev () {
+  renderArrowPrev (theme) {
     if (this.props.currImg === 0) return null
 
     return (
       <Arrow
+        theme={theme}
         direction="left"
         icon="arrowLeft"
         onClick={this.gotoPrev}
@@ -184,11 +179,12 @@ class ImgsViewer extends Component {
       />
     )
   }
-  renderArrowNext () {
+  renderArrowNext (theme) {
     if (this.props.currImg === (this.props.imgs.length - 1)) return null
 
     return (
       <Arrow
+        theme={theme}
         direction="right"
         icon="arrowRight"
         onClick={this.gotoNext}
@@ -207,24 +203,29 @@ class ImgsViewer extends Component {
     const offsetThumbnails = showThumbnails ? this.theme.thumbnail.size + this.theme.container.gutter.vertical : 0
 
     return (
-      <Container
-        key="open"
-        onClick={backdropCloseable && this.closeBackdrop}
-        onTouchEnd={backdropCloseable && this.closeBackdrop}
-      >
-        <Fragment>
-          <div className={css(this.classes.content)} style={{ marginBottom: offsetThumbnails, maxWidth: width }}>
-            {imgLoaded && this.renderHeader()}
-            {this.renderImgs()}
-            {this.renderSpinner()}
-            {imgLoaded && this.renderFooter()}
-          </div>
-          {imgLoaded && this.renderThumbnails()}
-          {imgLoaded && this.renderArrowPrev()}
-          {imgLoaded && this.renderArrowNext()}
-          {this.props.preventScroll && <ScrollLock />}
-        </Fragment>
-      </Container>
+      <ThemeContext.Consumer>
+        {theme => (
+          <Container
+            theme={theme}
+            key="open"
+            onClick={backdropCloseable && this.closeBackdrop}
+            onTouchEnd={backdropCloseable && this.closeBackdrop}
+          >
+            <Fragment>
+              <div className={css(this.classes.content)} style={{ marginBottom: offsetThumbnails, maxWidth: width }}>
+                {imgLoaded && this.renderHeader(theme)}
+                {this.renderImgs()}
+                {this.renderSpinner()}
+                {imgLoaded && this.renderFooter(theme)}
+              </div>
+              {imgLoaded && this.renderThumbnails(theme)}
+              {imgLoaded && this.renderArrowPrev(theme)}
+              {imgLoaded && this.renderArrowNext(theme)}
+              {this.props.preventScroll && <ScrollLock />}
+            </Fragment>
+          </Container>
+        )}
+      </ThemeContext.Consumer>
     )
   }
   renderImgs () {
@@ -261,13 +262,14 @@ class ImgsViewer extends Component {
       </figure>
     )
   }
-  renderThumbnails () {
+  renderThumbnails (theme) {
     const { imgs, currImg, leftArrowTitle, rightArrowTitle, onClickThumbnail, showThumbnails, thumbnailOffset } = this.props
 
     if (!showThumbnails) return null
 
     return (
       <PaginatedThumbnails
+        theme={theme}
         leftTitle={leftArrowTitle}
         rightTitle={rightArrowTitle}
         currImg={currImg}
@@ -277,11 +279,12 @@ class ImgsViewer extends Component {
       />
     )
   }
-  renderHeader () {
+  renderHeader (theme) {
     const { closeBtnTitle, customControls, onClose, showCloseBtn } = this.props
 
     return (
       <Header
+        theme={theme}
         customControls={customControls}
         onClose={onClose}
         showCloseBtn={showCloseBtn}
@@ -289,13 +292,14 @@ class ImgsViewer extends Component {
       />
     )
   }
-  renderFooter () {
+  renderFooter (theme) {
     const { currImg, imgs, imgCountSeparator, showImgCount } = this.props
 
     if (!imgs || !imgs.length) return null
 
     return (
       <Footer
+        theme={theme}
         caption={imgs[currImg].caption}
         countCurr={currImg + 1}
         countSeparator={imgCountSeparator}
@@ -321,9 +325,11 @@ class ImgsViewer extends Component {
   }
   render () {
     return (
-      <Portal>
-        {this.renderDialog()}
-      </Portal>
+      <ThemeContext.Provider value={this.props.theme}>
+        <Portal>
+          {this.renderDialog()}
+        </Portal>
+      </ThemeContext.Provider>
     )
   }
 }
@@ -383,9 +389,6 @@ ImgsViewer.defaultProps = {
   theme: {},
   thumbnailOffset: 2,
   width: 1024,
-}
-ImgsViewer.childContextTypes = {
-  theme: PropTypes.object.isRequired,
 }
 
 const defaultStyles = {

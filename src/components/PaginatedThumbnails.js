@@ -93,12 +93,13 @@ export default class PaginatedThumbnails extends Component {
   // Renderers
   // ====================
 
-  renderArrowPrev () {
+  renderArrowPrev (theme) {
     const { leftTitle } = this.props
     if (this.getFirst() <= 0) return null
 
     return (
       <Arrow
+        theme={theme}
         direction="left"
         size="small"
         icon="arrowLeft"
@@ -106,16 +107,17 @@ export default class PaginatedThumbnails extends Component {
         style={arrowStyles}
         title={leftTitle}
         type="button"
-      />
-    )
-  }
-  renderArrowNext () {
-    const { offset, imgs, rightTitle } = this.props
-    const totalCount = 2 * offset + 1
-    if (this.getFirst() + totalCount >= imgs.length) return null
+        />
+      )
+    }
+    renderArrowNext (theme) {
+      const { offset, imgs, rightTitle } = this.props
+      const totalCount = 2 * offset + 1
+      if (this.getFirst() + totalCount >= imgs.length) return null
 
-    return (
-      <Arrow
+      return (
+        <Arrow
+        theme={theme}
         direction="right"
         size="small"
         icon="arrowRight"
@@ -127,7 +129,7 @@ export default class PaginatedThumbnails extends Component {
     )
   }
   render () {
-    const { imgs, currImg, onClickThumbnail, offset } = this.props
+    const { imgs, currImg, onClickThumbnail, offset, theme } = this.props
 
     const totalCount = 2 * offset + 1 // show $offset extra thumbnails on each side
     let thumbnails = []
@@ -141,9 +143,10 @@ export default class PaginatedThumbnails extends Component {
 
     return (
       <div className={css(classes.paginatedThumbnails)}>
-        {this.renderArrowPrev()}
+        {this.renderArrowPrev(theme)}
         {thumbnails.map((img, idx) => (
           <Thumbnail
+            theme={theme}
             key={baseOffset + idx}
             {...img}
             index={baseOffset + idx}
@@ -151,13 +154,14 @@ export default class PaginatedThumbnails extends Component {
             active={baseOffset + idx === currImg}
           />
         ))}
-        {this.renderArrowNext()}
+        {this.renderArrowNext(theme)}
       </div>
     )
   }
 }
 
 PaginatedThumbnails.propTypes = {
+  theme: PropTypes.object,
   leftTitle: PropTypes.string,
   rightTitle: PropTypes.string,
   currImg: PropTypes.number,

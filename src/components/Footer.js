@@ -4,7 +4,7 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import defaults from '../theme'
 import { deepMerge } from '../utils/util'
 
-function Footer ({ caption, countCurr, countSeparator, countTotal, showCount, ...props }, { theme }) {
+function Footer ({ caption, countCurr, countSeparator, countTotal, showCount, theme, ...props }) {
   if (!caption && !showCount) return null
 
   const classes = StyleSheet.create(deepMerge(defaultStyles, theme))
@@ -30,14 +30,12 @@ function Footer ({ caption, countCurr, countSeparator, countTotal, showCount, ..
 }
 
 Footer.propTypes ={
+  theme: PropTypes.object,
   caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   countCurr: PropTypes.number,
   countSeparator: PropTypes.string,
   countTotal: PropTypes.number,
   showCount: PropTypes.bool,
-}
-Footer.contextTypes = {
-  theme: PropTypes.object.isRequired,
 }
 
 const defaultStyles = {

@@ -5,7 +5,8 @@ import { css, StyleSheet } from 'aphrodite/no-important';
 import defaults from '../theme';
 import { deepMerge } from '../utils/util';
 
-function Thumbnail ({ index, src, thumbnail, active, onClick }, { theme }) {
+
+function Thumbnail ({ index, src, thumbnail, active, onClick, theme }) {
   const url = thumbnail || src
   const classes = StyleSheet.create(deepMerge(defaultStyles, theme))
 
@@ -23,15 +24,12 @@ function Thumbnail ({ index, src, thumbnail, active, onClick }, { theme }) {
 }
 
 Thumbnail.propTypes = {
+  theme: PropTypes.object,
   active: PropTypes.bool,
   index: PropTypes.number,
   onClick: PropTypes.func.isRequired,
   src: PropTypes.string,
   thumbnail: PropTypes.string,
-}
-
-Thumbnail.contextTypes = {
-  theme: PropTypes.object.isRequired
 }
 
 const defaultStyles = {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component, Children, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { css, StyleSheet } from 'aphrodite/no-important';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { render, unmountComponentAtNode } from 'react-dom';
@@ -207,13 +207,13 @@ Icon.defaultProps = {
   fill: '#fff'
 };
 
-function Arrow(_ref, _ref2) {
-  var theme$$1 = _ref2.theme;
+function Arrow(_ref) {
   var direction = _ref.direction,
       icon = _ref.icon,
       onClick = _ref.onClick,
       size = _ref.size,
-      props = objectWithoutProperties(_ref, ['direction', 'icon', 'onClick', 'size']);
+      theme$$1 = _ref.theme,
+      props = objectWithoutProperties(_ref, ['direction', 'icon', 'onClick', 'size', 'theme']);
 
   var classes = StyleSheet.create(deepMerge(defaultStyles, theme$$1));
 
@@ -230,6 +230,7 @@ function Arrow(_ref, _ref2) {
 }
 
 Arrow.propTypes = {
+  theme: PropTypes.object,
   direction: PropTypes.oneOf(['left', 'right']),
   icon: PropTypes.string,
   onClick: PropTypes.func.isRequired,
@@ -237,9 +238,6 @@ Arrow.propTypes = {
 };
 Arrow.defaultProps = {
   size: 'medium'
-};
-Arrow.contextTypes = {
-  theme: PropTypes.object.isRequired
 };
 var defaultStyles = {
   arrow: {
@@ -286,11 +284,8 @@ var defaultStyles = {
   }
 };
 
-function Container(_ref, _ref2) {
-  var theme$$1 = _ref2.theme;
-  var props = objectWithoutProperties(_ref, []);
-
-  var classes = StyleSheet.create(deepMerge(defaultStyles$1, theme$$1));
+function Container(props) {
+  var classes = StyleSheet.create(deepMerge(defaultStyles$1, props.theme));
 
   return React.createElement('div', _extends({
     id: 'viewerBackdrop',
@@ -298,8 +293,8 @@ function Container(_ref, _ref2) {
   }, props));
 }
 
-Container.contextTypes = {
-  theme: PropTypes.object.isRequired
+Container.propTypes = {
+  theme: PropTypes.object
 };
 
 var defaultStyles$1 = {
@@ -322,14 +317,14 @@ var defaultStyles$1 = {
   }
 };
 
-function Footer(_ref, _ref2) {
-  var theme$$1 = _ref2.theme;
+function Footer(_ref) {
   var caption = _ref.caption,
       countCurr = _ref.countCurr,
       countSeparator = _ref.countSeparator,
       countTotal = _ref.countTotal,
       showCount = _ref.showCount,
-      props = objectWithoutProperties(_ref, ['caption', 'countCurr', 'countSeparator', 'countTotal', 'showCount']);
+      theme$$1 = _ref.theme,
+      props = objectWithoutProperties(_ref, ['caption', 'countCurr', 'countSeparator', 'countTotal', 'showCount', 'theme']);
 
   if (!caption && !showCount) return null;
 
@@ -356,14 +351,12 @@ function Footer(_ref, _ref2) {
 }
 
 Footer.propTypes = {
+  theme: PropTypes.object,
   caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   countCurr: PropTypes.number,
   countSeparator: PropTypes.string,
   countTotal: PropTypes.number,
   showCount: PropTypes.bool
-};
-Footer.contextTypes = {
-  theme: PropTypes.object.isRequired
 };
 
 var defaultStyles$2 = {
@@ -390,13 +383,13 @@ var defaultStyles$2 = {
   }
 };
 
-function Header(_ref, _ref2) {
-  var theme$$1 = _ref2.theme;
+function Header(_ref) {
   var customControls = _ref.customControls,
       onClose = _ref.onClose,
       showCloseBtn = _ref.showCloseBtn,
       closeBtnTitle = _ref.closeBtnTitle,
-      props = objectWithoutProperties(_ref, ['customControls', 'onClose', 'showCloseBtn', 'closeBtnTitle']);
+      theme$$1 = _ref.theme,
+      props = objectWithoutProperties(_ref, ['customControls', 'onClose', 'showCloseBtn', 'closeBtnTitle', 'theme']);
 
   var classes = StyleSheet.create(deepMerge(defaultStyles$3, theme$$1));
 
@@ -417,13 +410,11 @@ function Header(_ref, _ref2) {
 }
 
 Header.propTypes = {
+  theme: PropTypes.object,
   customControls: PropTypes.array,
   onClose: PropTypes.func.isRequired,
   showCloseBtn: PropTypes.bool,
   closeBtnTitle: PropTypes.string
-};
-Header.contextTypes = {
-  theme: PropTypes.object.isRequired
 };
 
 var defaultStyles$3 = {
@@ -449,13 +440,13 @@ var defaultStyles$3 = {
   }
 };
 
-function Thumbnail(_ref, _ref2) {
+function Thumbnail(_ref) {
   var index = _ref.index,
       src = _ref.src,
       thumbnail = _ref.thumbnail,
       active = _ref.active,
-      _onClick = _ref.onClick;
-  var theme$$1 = _ref2.theme;
+      _onClick = _ref.onClick,
+      theme$$1 = _ref.theme;
 
   var url = thumbnail || src;
   var classes = StyleSheet.create(deepMerge(defaultStyles$4, theme$$1));
@@ -472,15 +463,12 @@ function Thumbnail(_ref, _ref2) {
 }
 
 Thumbnail.propTypes = {
+  theme: PropTypes.object,
   active: PropTypes.bool,
   index: PropTypes.number,
   onClick: PropTypes.func.isRequired,
   src: PropTypes.string,
   thumbnail: PropTypes.string
-};
-
-Thumbnail.contextTypes = {
-  theme: PropTypes.object.isRequired
 };
 
 var defaultStyles$4 = {
@@ -616,12 +604,13 @@ var PaginatedThumbnails = function (_Component) {
 
   }, {
     key: 'renderArrowPrev',
-    value: function renderArrowPrev() {
+    value: function renderArrowPrev(theme$$1) {
       var leftTitle = this.props.leftTitle;
 
       if (this.getFirst() <= 0) return null;
 
       return React.createElement(Arrow, {
+        theme: theme$$1,
         direction: 'left',
         size: 'small',
         icon: 'arrowLeft',
@@ -633,7 +622,7 @@ var PaginatedThumbnails = function (_Component) {
     }
   }, {
     key: 'renderArrowNext',
-    value: function renderArrowNext() {
+    value: function renderArrowNext(theme$$1) {
       var _props3 = this.props,
           offset = _props3.offset,
           imgs = _props3.imgs,
@@ -643,6 +632,7 @@ var PaginatedThumbnails = function (_Component) {
       if (this.getFirst() + totalCount >= imgs.length) return null;
 
       return React.createElement(Arrow, {
+        theme: theme$$1,
         direction: 'right',
         size: 'small',
         icon: 'arrowRight',
@@ -659,7 +649,8 @@ var PaginatedThumbnails = function (_Component) {
           imgs = _props4.imgs,
           currImg = _props4.currImg,
           onClickThumbnail = _props4.onClickThumbnail,
-          offset = _props4.offset;
+          offset = _props4.offset,
+          theme$$1 = _props4.theme;
 
 
       var totalCount = 2 * offset + 1; // show $offset extra thumbnails on each side
@@ -676,9 +667,10 @@ var PaginatedThumbnails = function (_Component) {
       return React.createElement(
         'div',
         { className: css(classes.paginatedThumbnails) },
-        this.renderArrowPrev(),
+        this.renderArrowPrev(theme$$1),
         thumbnails.map(function (img, idx) {
           return React.createElement(Thumbnail, _extends({
+            theme: theme$$1,
             key: baseOffset + idx
           }, img, {
             index: baseOffset + idx,
@@ -686,7 +678,7 @@ var PaginatedThumbnails = function (_Component) {
             active: baseOffset + idx === currImg
           }));
         }),
-        this.renderArrowNext()
+        this.renderArrowNext(theme$$1)
       );
     }
   }]);
@@ -695,44 +687,13 @@ var PaginatedThumbnails = function (_Component) {
 
 
 PaginatedThumbnails.propTypes = {
+  theme: PropTypes.object,
   leftTitle: PropTypes.string,
   rightTitle: PropTypes.string,
   currImg: PropTypes.number,
   imgs: PropTypes.array,
   offset: PropTypes.number,
   onClickThumbnail: PropTypes.func.isRequired
-};
-
-// Pass the Viewer context through to the Portal's descendents
-
-var PassContext = function (_Component) {
-  inherits(PassContext, _Component);
-
-  function PassContext() {
-    classCallCheck(this, PassContext);
-    return possibleConstructorReturn(this, (PassContext.__proto__ || Object.getPrototypeOf(PassContext)).apply(this, arguments));
-  }
-
-  createClass(PassContext, [{
-    key: 'getChildContext',
-    value: function getChildContext() {
-      return this.props.context;
-    }
-  }, {
-    key: 'render',
-    value: function render$$1() {
-      // Verifies that children has only one child(a React element) and returns it. Otherwise this method throws an error.
-      return Children.only(this.props.children);
-    }
-  }]);
-  return PassContext;
-}(Component);
-
-PassContext.propTypes = {
-  context: PropTypes.object.isRequired
-};
-PassContext.childContextTypes = {
-  theme: PropTypes.object
 };
 
 var Portal = function (_Component) {
@@ -758,32 +719,29 @@ var Portal = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
+      // Animate fade on mount/unmount
       var duration = 200;
-      var styles = '\n      .fade-eneter { opacity: .01; }\n      .fade-enter.fade-enter-active { opacity: 1; transition: opacity ' + duration + 'ms; }\n      .fade-leave { opacity: 1; }\n      .fade-leave.fade-leave-active { opacity: .01; transition: opacity ' + duration + 'ms; }\n    ';
+      var styles = '\n\t\t\t\t.fade-enter { opacity: 0.01; }\n\t\t\t\t.fade-enter.fade-enter-active { opacity: 1; transition: opacity ' + duration + 'ms; }\n\t\t\t\t.fade-leave { opacity: 1; }\n\t\t\t\t.fade-leave.fade-leave-active { opacity: 0.01; transition: opacity ' + duration + 'ms; }\n\t\t';
 
       render(React.createElement(
-        PassContext,
-        { context: this.context },
+        'div',
+        null,
         React.createElement(
-          'div',
+          'style',
           null,
-          React.createElement(
-            'style',
-            null,
-            styles
-          ),
-          React.createElement(CSSTransitionGroup, _extends({
-            component: 'div',
-            transitionName: 'fade',
-            transitionEnterTimeout: duration,
-            transitionLeaveTimeout: duration
-          }, this.props))
-        )
+          styles
+        ),
+        React.createElement(CSSTransitionGroup, _extends({
+          component: 'div',
+          transitionName: 'fade',
+          transitionEnterTimeout: duration,
+          transitionLeaveTimeout: duration
+        }, this.props))
       ), this.portalElement);
     }
   }, {
-    key: 'UNSAFE_componentWillUnmount',
-    value: function UNSAFE_componentWillUnmount() {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
       unmountComponentAtNode(this.portalElement);
       document.body.removeChild(this.portalElement);
     }
@@ -795,11 +753,6 @@ var Portal = function (_Component) {
   }]);
   return Portal;
 }(Component);
-
-
-Portal.contextTypes = {
-  theme: PropTypes.object.isRequired
-};
 
 var Spinner = function Spinner(props) {
   var classes = StyleSheet.create(styles(props));
@@ -869,6 +822,8 @@ function normalizeSourceSet(data) {
   return sourceSet;
 }
 
+var ThemeContext = React.createContext(theme);
+
 var ImgsViewer = function (_Component) {
   inherits(ImgsViewer, _Component);
 
@@ -877,8 +832,8 @@ var ImgsViewer = function (_Component) {
 
     var _this = possibleConstructorReturn(this, (ImgsViewer.__proto__ || Object.getPrototypeOf(ImgsViewer)).call(this, props));
 
-    _this.theme = deepMerge(theme, _this.theme);
-    _this.classes = StyleSheet$1.create(deepMerge(defaultStyles$5, _this.theme));
+    _this.theme = deepMerge(theme, _this.props.theme);
+    _this.classes = StyleSheet$1.create(deepMerge(defaultStyles$5, _this.props.theme));
     _this.state = { imgLoaded: false };
 
     bindFunctions.call(_this, ['gotoNext', 'gotoPrev', 'closeBackdrop', 'handleKeyboardInput', 'handleImgLoaded']);
@@ -886,13 +841,6 @@ var ImgsViewer = function (_Component) {
   }
 
   createClass(ImgsViewer, [{
-    key: 'getChildContext',
-    value: function getChildContext() {
-      return {
-        theme: this.theme
-      };
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       if (this.props.isOpen) {
@@ -904,16 +852,22 @@ var ImgsViewer = function (_Component) {
         }
       }
     }
+    // static getDerivedStateFromProps (nextProps, prevState) {
+
   }, {
     key: 'UNSAFE_componentWillReceiveProps',
     value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (!canUseDom) return;
+
+      // const instance = this
 
       // always to preload imgs with both directions
       // then when user changs direction, img also show quickly
       if (nextProps.preloadNextImg) {
         var nextIdx = nextProps.currImg + 1;
         var prevIdx = nextProps.currImg - 1;
+        // debugger
+        // if (!this) return null
         this.preloadImg(prevIdx);
         this.preloadImg(nextIdx);
       }
@@ -930,10 +884,12 @@ var ImgsViewer = function (_Component) {
       if (!nextProps.isOpen && nextProps.enableKeyboardInput) {
         window.removeEventListener('keydown', this.handleKeyboardInput);
       }
+
+      return null;
     }
   }, {
-    key: 'UNSAFE_componentWillUnmount',
-    value: function UNSAFE_componentWillUnmount() {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
       if (this.props.enableKeyboardInput) {
         window.removeEventListener('keydown', this.handleKeyboardInput);
       }
@@ -1035,10 +991,11 @@ var ImgsViewer = function (_Component) {
 
   }, {
     key: 'renderArrowPrev',
-    value: function renderArrowPrev() {
+    value: function renderArrowPrev(theme$$1) {
       if (this.props.currImg === 0) return null;
 
       return React.createElement(Arrow, {
+        theme: theme$$1,
         direction: 'left',
         icon: 'arrowLeft',
         onClick: this.gotoPrev,
@@ -1048,10 +1005,11 @@ var ImgsViewer = function (_Component) {
     }
   }, {
     key: 'renderArrowNext',
-    value: function renderArrowNext() {
+    value: function renderArrowNext(theme$$1) {
       if (this.props.currImg === this.props.imgs.length - 1) return null;
 
       return React.createElement(Arrow, {
+        theme: theme$$1,
         direction: 'right',
         icon: 'arrowRight',
         onClick: this.gotoNext,
@@ -1062,6 +1020,8 @@ var ImgsViewer = function (_Component) {
   }, {
     key: 'renderDialog',
     value: function renderDialog() {
+      var _this2 = this;
+
       var _props2 = this.props,
           backdropCloseable = _props2.backdropCloseable,
           isOpen = _props2.isOpen,
@@ -1075,28 +1035,35 @@ var ImgsViewer = function (_Component) {
       var offsetThumbnails = showThumbnails ? this.theme.thumbnail.size + this.theme.container.gutter.vertical : 0;
 
       return React.createElement(
-        Container,
-        {
-          key: 'open',
-          onClick: backdropCloseable && this.closeBackdrop,
-          onTouchEnd: backdropCloseable && this.closeBackdrop
-        },
-        React.createElement(
-          Fragment,
-          null,
-          React.createElement(
-            'div',
-            { className: css$1(this.classes.content), style: { marginBottom: offsetThumbnails, maxWidth: width } },
-            imgLoaded && this.renderHeader(),
-            this.renderImgs(),
-            this.renderSpinner(),
-            imgLoaded && this.renderFooter()
-          ),
-          imgLoaded && this.renderThumbnails(),
-          imgLoaded && this.renderArrowPrev(),
-          imgLoaded && this.renderArrowNext(),
-          this.props.preventScroll && React.createElement(ScrollLock, null)
-        )
+        ThemeContext.Consumer,
+        null,
+        function (theme$$1) {
+          return React.createElement(
+            Container,
+            {
+              theme: theme$$1,
+              key: 'open',
+              onClick: backdropCloseable && _this2.closeBackdrop,
+              onTouchEnd: backdropCloseable && _this2.closeBackdrop
+            },
+            React.createElement(
+              Fragment,
+              null,
+              React.createElement(
+                'div',
+                { className: css$1(_this2.classes.content), style: { marginBottom: offsetThumbnails, maxWidth: width } },
+                imgLoaded && _this2.renderHeader(theme$$1),
+                _this2.renderImgs(),
+                _this2.renderSpinner(),
+                imgLoaded && _this2.renderFooter(theme$$1)
+              ),
+              imgLoaded && _this2.renderThumbnails(theme$$1),
+              imgLoaded && _this2.renderArrowPrev(theme$$1),
+              imgLoaded && _this2.renderArrowNext(theme$$1),
+              _this2.props.preventScroll && React.createElement(ScrollLock, null)
+            )
+          );
+        }
       );
     }
   }, {
@@ -1138,7 +1105,7 @@ var ImgsViewer = function (_Component) {
     }
   }, {
     key: 'renderThumbnails',
-    value: function renderThumbnails() {
+    value: function renderThumbnails(theme$$1) {
       var _props4 = this.props,
           imgs = _props4.imgs,
           currImg = _props4.currImg,
@@ -1152,6 +1119,7 @@ var ImgsViewer = function (_Component) {
       if (!showThumbnails) return null;
 
       return React.createElement(PaginatedThumbnails, {
+        theme: theme$$1,
         leftTitle: leftArrowTitle,
         rightTitle: rightArrowTitle,
         currImg: currImg,
@@ -1162,7 +1130,7 @@ var ImgsViewer = function (_Component) {
     }
   }, {
     key: 'renderHeader',
-    value: function renderHeader() {
+    value: function renderHeader(theme$$1) {
       var _props5 = this.props,
           closeBtnTitle = _props5.closeBtnTitle,
           customControls = _props5.customControls,
@@ -1171,6 +1139,7 @@ var ImgsViewer = function (_Component) {
 
 
       return React.createElement(Header, {
+        theme: theme$$1,
         customControls: customControls,
         onClose: onClose,
         showCloseBtn: showCloseBtn,
@@ -1179,7 +1148,7 @@ var ImgsViewer = function (_Component) {
     }
   }, {
     key: 'renderFooter',
-    value: function renderFooter() {
+    value: function renderFooter(theme$$1) {
       var _props6 = this.props,
           currImg = _props6.currImg,
           imgs = _props6.imgs,
@@ -1190,6 +1159,7 @@ var ImgsViewer = function (_Component) {
       if (!imgs || !imgs.length) return null;
 
       return React.createElement(Footer, {
+        theme: theme$$1,
         caption: imgs[currImg].caption,
         countCurr: currImg + 1,
         countSeparator: imgCountSeparator,
@@ -1221,9 +1191,13 @@ var ImgsViewer = function (_Component) {
     key: 'render',
     value: function render$$1() {
       return React.createElement(
-        Portal,
-        null,
-        this.renderDialog()
+        ThemeContext.Provider,
+        { value: this.props.theme },
+        React.createElement(
+          Portal,
+          null,
+          this.renderDialog()
+        )
       );
     }
   }]);
@@ -1283,9 +1257,6 @@ ImgsViewer.defaultProps = {
   theme: {},
   thumbnailOffset: 2,
   width: 1024
-};
-ImgsViewer.childContextTypes = {
-  theme: PropTypes.object.isRequired
 };
 
 var defaultStyles$5 = {

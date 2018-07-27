@@ -5,8 +5,8 @@ import { css, StyleSheet } from 'aphrodite/no-important'
 import defaults from '../theme'
 import { deepMerge } from '../utils/util'
 
-function Container ({ ...props }, { theme }) {
-  const classes = StyleSheet.create(deepMerge(defaultStyles, theme))
+function Container (props) {
+  const classes = StyleSheet.create(deepMerge(defaultStyles, props.theme))
 
   return (
     <div
@@ -17,8 +17,8 @@ function Container ({ ...props }, { theme }) {
   )
 }
 
-Container.contextTypes = {
-  theme: PropTypes.object.isRequired,
+Container.propTypes = {
+  theme: PropTypes.object
 }
 
 const defaultStyles = {

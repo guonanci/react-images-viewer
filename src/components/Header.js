@@ -6,7 +6,7 @@ import defaults from '../theme'
 import { deepMerge } from '../utils/util'
 import Icon from './Icon'
 
-function Header ({ customControls, onClose, showCloseBtn, closeBtnTitle, ...props }, { theme }) {
+function Header ({ customControls, onClose, showCloseBtn, closeBtnTitle, theme, ...props }) {
   const classes = StyleSheet.create(deepMerge(defaultStyles, theme))
 
   return (
@@ -26,13 +26,11 @@ function Header ({ customControls, onClose, showCloseBtn, closeBtnTitle, ...prop
 }
 
 Header.propTypes = {
+  theme: PropTypes.object,
   customControls: PropTypes.array,
   onClose: PropTypes.func.isRequired,
   showCloseBtn: PropTypes.bool,
   closeBtnTitle: PropTypes.string,
-}
-Header.contextTypes = {
-  theme: PropTypes.object.isRequired,
 }
 
 const defaultStyles = {

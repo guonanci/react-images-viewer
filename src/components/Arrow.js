@@ -6,7 +6,7 @@ import defaults from '../theme'
 import { deepMerge } from '../utils/util'
 import Icon from './Icon'
 
-function Arrow ({ direction, icon, onClick, size, ...props }, { theme, }) {
+function Arrow ({ direction, icon, onClick, size, theme, ...props }) {
   const classes = StyleSheet.create(deepMerge(defaultStyles, theme))
 
   return (
@@ -23,6 +23,7 @@ function Arrow ({ direction, icon, onClick, size, ...props }, { theme, }) {
 }
 
 Arrow.propTypes = {
+  theme: PropTypes.object,
   direction: PropTypes.oneOf(['left', 'right']),
   icon: PropTypes.string,
   onClick: PropTypes.func.isRequired,
@@ -30,9 +31,6 @@ Arrow.propTypes = {
 }
 Arrow.defaultProps = {
   size: 'medium',
-}
-Arrow.contextTypes = {
-  theme: PropTypes.object.isRequired,
 }
 const defaultStyles = {
   arrow: {
