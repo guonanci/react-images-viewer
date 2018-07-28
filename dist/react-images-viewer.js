@@ -913,7 +913,7 @@
     }, {
       key: 'preloadImg',
       value: function preloadImg(idx, onload) {
-        return this.prelaodImgData(this.props.imgs[idx], onload);
+        return this.preloadImgData(this.props.imgs[idx], onload);
       }
     }, {
       key: 'preloadImgData',
