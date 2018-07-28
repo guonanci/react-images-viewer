@@ -68,6 +68,7 @@ const IMG_SET = [
   {
     src: 'http://example.com/img1.svg',
     caption: 'A forest',
+    // As an array
     srcSet: [
       'http://example.com/img1_1024.jpg 1024w',
       'http://example.com/img1_800.jpg 800w',
@@ -77,12 +78,8 @@ const IMG_SET = [
   },
   {
     src: 'http://example.com/img2.svg',
-    srcSet: [
-      'http://example.com/img2_1024.jpg 1024w',
-      'http://example.com/img2_800.jpg 800w',
-      'http://example.com/img2_500.jpg 500w',
-      'http://example.com/img2_320.jpg 320w'
-    ]
+    // As a string
+    srcSet: 'http://example.com/img2_1024.jpg 1024w, http://example.com/img2_800.jpg 800w, http://example.com/img2_500.jpg 500w, http://example.com/img2_320.jpg 320w',
   }
 ]
 ```
@@ -120,6 +117,6 @@ preventAutoScroll | 布尔值 | true | 是否阻止自动滚动
 Property      | Type     | Default      | Description
 :----------|:----------|:----------|:----------
 src     | 字符串     | undefined     | 必须项
-srcSet      | 字符串数组     | undefined     | 可选项
+srcSet      | 字符串数组或者字符串     | undefined     | 可选项
 caption     | 字符串     | undefined     | 可选项
 alt     | 字符串     | undefined     | 可选项

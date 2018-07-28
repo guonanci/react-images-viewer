@@ -433,6 +433,7 @@
       position: 'relative',
       top: 0,
       verticalAlign: 'bottom',
+      zIndex: 1,
 
       // increase hit area
       height: 40,
@@ -723,7 +724,7 @@
       value: function componentDidUpdate() {
         // Animate fade on mount/unmount
         var duration = 200;
-        var styles = '\n\t\t\t\t.fade-enter { opacity: 0.01; }\n\t\t\t\t.fade-enter.fade-enter-active { opacity: 1; transition: opacity ' + duration + 'ms; }\n\t\t\t\t.fade-leave { opacity: 1; }\n\t\t\t\t.fade-leave.fade-leave-active { opacity: 0.01; transition: opacity ' + duration + 'ms; }\n\t\t';
+        var styles = '\n\t\t\t\t.fade-enter { opacity: 0.01; }\n\t\t\t\t.fade-enter.fade-enter-active { opacity: 1; transition: opacity ' + duration + 'ms; }\n\t\t\t\t.fade-leave { opacity: 1; }\n\t\t\t\t.fade-leave.fade-leave-active { opacity: .01; transition: opacity ' + duration + 'ms; }\n\t\t';
 
         reactDom.render(React__default.createElement(
           'div',
@@ -733,12 +734,15 @@
             null,
             styles
           ),
-          React__default.createElement(reactTransitionGroup.CSSTransitionGroup, _extends({
-            component: 'div',
-            transitionName: 'fade',
-            transitionEnterTimeout: duration,
-            transitionLeaveTimeout: duration
-          }, this.props))
+          React__default.createElement(
+            reactTransitionGroup.TransitionGroup,
+            this.props,
+            React__default.createElement(
+              reactTransitionGroup.CSSTransition,
+              { timeout: { enter: duration, exit: duration }, className: 'fade' },
+              this.props.children
+            )
+          )
         ), this.portalElement);
       }
     }, {
@@ -755,6 +759,11 @@
     }]);
     return Portal;
   }(React.Component);
+
+
+  Portal.propTypes = {
+    children: PropTypes.element
+  };
 
   var Spinner = function Spinner(props) {
     var classes = noImportant.StyleSheet.create(styles(props));
@@ -875,8 +884,8 @@
         }
         // preload currImg
         if (this.props.currImg !== nextProps.currImg || !this.props.isOpen && nextProps.isOpen) {
-          var img = this.preloadImg(nextProps.currImg, this.handleImgLoaded);
-          this.setState({ imgLoaded: img.complete });
+          var img = this.preloadImgData(nextProps.imgs[nextProps.currImg], this.handleImgLoaded);
+          if (img) this.setState({ imgLoaded: img.complete });
         }
 
         // add/remove event listeners
@@ -904,8 +913,11 @@
     }, {
       key: 'preloadImg',
       value: function preloadImg(idx, onload) {
-        var data = this.props.imgs[idx];
-
+        return this.prelaodImgData(this.props.imgs[idx], onload);
+      }
+    }, {
+      key: 'preloadImgData',
+      value: function preloadImgData(data, onload) {
         if (!data) return;
 
         var img = new Image();
@@ -1207,7 +1219,6 @@
   }(React.Component);
 
   ImgsViewer.propTypes = {
-    lang: PropTypes.string,
     backdropCloseable: PropTypes.bool,
     closeBtnTitle: PropTypes.string,
     currImg: PropTypes.number,
@@ -1216,7 +1227,7 @@
     imgCountSeparator: PropTypes.string,
     imgs: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,
-      srcSet: PropTypes.array,
+      srcSet: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
       caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
       thumbnail: PropTypes.string
     })).isRequired,
@@ -1241,7 +1252,6 @@
     width: PropTypes.number
   };
   ImgsViewer.defaultProps = {
-    lang: 'zh_CN',
     closeBtnTitle: '关闭（空格键）',
     currImg: 0,
     enableKeyboardInput: true,
@@ -1293,7 +1303,8 @@
 
       // opacity animation to make spinner appear with delay
       opacity: 0,
-      transition: 'opacity .3s'
+      transition: 'opacity .3s',
+      pointerEvents: 'none'
     },
     spinnerActive: {
       opacity: 1

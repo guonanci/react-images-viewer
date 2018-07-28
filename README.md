@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/guonanci/react-images-viewer.svg?branch=master)](https://travis-ci.org/guonanci/react-images-viewer)
 [![Coverage Status](https://coveralls.io/repos/github/guonanci/react-images-viewer/badge.svg?branch=master)](https://coveralls.io/github/guonanci/react-images-viewer?branch=master)
+[![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
 
 A react library that view photos list easily, and a simple, responsive viewer component for displaying an array of images.
 
@@ -68,6 +69,7 @@ const IMG_SET = [
   {
     src: 'http://example.com/img1.svg',
     caption: 'A forest',
+    // As an array
     srcSet: [
       'http://example.com/img1_1024.jpg 1024w',
       'http://example.com/img1_800.jpg 800w',
@@ -77,12 +79,8 @@ const IMG_SET = [
   },
   {
     src: 'http://example.com/img2.svg',
-    srcSet: [
-      'http://example.com/img2_1024.jpg 1024w',
-      'http://example.com/img2_800.jpg 800w',
-      'http://example.com/img2_500.jpg 500w',
-      'http://example.com/img2_320.jpg 320w'
-    ]
+    // As a string
+    srcSet: 'http://example.com/img2_1024.jpg 1024w, http://example.com/img2_800.jpg 800w, http://example.com/img2_500.jpg 500w, http://example.com/img2_320.jpg 320w',
   }
 ]
 ```
@@ -120,6 +118,6 @@ preventAutoScroll | bool | true | Determines whether auto-scrolling is prevented
 Property      | Type     | Default      | Description
 :----------|:----------|:----------|:----------
 src     | str     | undefined     | Required
-srcSet      | arr of str      | undefined     | Optional
+srcSet      | arr of str or str     | undefined     | Optional
 caption     | str     | undefined     | Optional
 alt     | str     | undefined     | Optional

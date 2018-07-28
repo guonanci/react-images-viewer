@@ -120,7 +120,7 @@ render(
           makeUnsplashSrcSet(id, 1024),
           makeUnsplashSrcSet(id, 800),
           makeUnsplashSrcSet(id, 500),
-          makeUnsplashSrcSet(id, 320)
+          makeUnsplashSrcSet(id, 320),
         ],
         caption,
         orientation,
@@ -137,7 +137,7 @@ render(
           makeUnsplashSrcSet(id, 1024),
           makeUnsplashSrcSet(id, 800),
           makeUnsplashSrcSet(id, 500),
-          makeUnsplashSrcSet(id, 320)
+          makeUnsplashSrcSet(id, 320),
         ],
         caption,
         orientation,
@@ -155,7 +155,7 @@ render(
           makeUnsplashSrcSet(id, 1024),
           makeUnsplashSrcSet(id, 800),
           makeUnsplashSrcSet(id, 500),
-          makeUnsplashSrcSet(id, 320)
+          makeUnsplashSrcSet(id, 320),
         ],
         caption,
         orientation,

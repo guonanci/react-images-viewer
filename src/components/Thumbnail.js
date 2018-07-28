@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { css, StyleSheet } from 'aphrodite/no-important';
+import PropTypes from 'prop-types'
+import React from 'react'
+import { css, StyleSheet } from 'aphrodite/no-important'
 
-import defaults from '../theme';
-import { deepMerge } from '../utils/util';
+import defaults from '../theme'
+import { deepMerge } from '../utils/util'
 
 
 function Thumbnail ({ index, src, thumbnail, active, onClick, theme }) {

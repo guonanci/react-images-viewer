@@ -1,4 +1,13 @@
 {
-  "ignore": ["node-modules/**"],
-  "presets": ["env", "stage-2", "react"]
+  "ignore": ["node-modules"],
+  "presets": ["env", "react"],
+  "plugins": [ ["transform-object-rest-spread", { "useBuiltIns": true }], "transform-object-assign"],
+  "env": {
+    "test": {
+      "presets": [
+        ["env"], "react"
+      ],
+      "plugins": ["istanbul"]
+    }
+  }
 }

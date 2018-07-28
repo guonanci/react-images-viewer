@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { css, StyleSheet } from 'aphrodite/no-important';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { StyleSheet as StyleSheet$1, css as css$1 } from 'aphrodite';
 import ScrollLock from 'react-scrolllock';
@@ -431,6 +431,7 @@ var defaultStyles$3 = {
     position: 'relative',
     top: 0,
     verticalAlign: 'bottom',
+    zIndex: 1,
 
     // increase hit area
     height: 40,
@@ -721,7 +722,7 @@ var Portal = function (_Component) {
     value: function componentDidUpdate() {
       // Animate fade on mount/unmount
       var duration = 200;
-      var styles = '\n\t\t\t\t.fade-enter { opacity: 0.01; }\n\t\t\t\t.fade-enter.fade-enter-active { opacity: 1; transition: opacity ' + duration + 'ms; }\n\t\t\t\t.fade-leave { opacity: 1; }\n\t\t\t\t.fade-leave.fade-leave-active { opacity: 0.01; transition: opacity ' + duration + 'ms; }\n\t\t';
+      var styles = '\n\t\t\t\t.fade-enter { opacity: 0.01; }\n\t\t\t\t.fade-enter.fade-enter-active { opacity: 1; transition: opacity ' + duration + 'ms; }\n\t\t\t\t.fade-leave { opacity: 1; }\n\t\t\t\t.fade-leave.fade-leave-active { opacity: .01; transition: opacity ' + duration + 'ms; }\n\t\t';
 
       render(React.createElement(
         'div',
@@ -731,12 +732,15 @@ var Portal = function (_Component) {
           null,
           styles
         ),
-        React.createElement(CSSTransitionGroup, _extends({
-          component: 'div',
-          transitionName: 'fade',
-          transitionEnterTimeout: duration,
-          transitionLeaveTimeout: duration
-        }, this.props))
+        React.createElement(
+          TransitionGroup,
+          this.props,
+          React.createElement(
+            CSSTransition,
+            { timeout: { enter: duration, exit: duration }, className: 'fade' },
+            this.props.children
+          )
+        )
       ), this.portalElement);
     }
   }, {
@@ -753,6 +757,11 @@ var Portal = function (_Component) {
   }]);
   return Portal;
 }(Component);
+
+
+Portal.propTypes = {
+  children: PropTypes.element
+};
 
 var Spinner = function Spinner(props) {
   var classes = StyleSheet.create(styles(props));
@@ -873,8 +882,8 @@ var ImgsViewer = function (_Component) {
       }
       // preload currImg
       if (this.props.currImg !== nextProps.currImg || !this.props.isOpen && nextProps.isOpen) {
-        var img = this.preloadImg(nextProps.currImg, this.handleImgLoaded);
-        this.setState({ imgLoaded: img.complete });
+        var img = this.preloadImgData(nextProps.imgs[nextProps.currImg], this.handleImgLoaded);
+        if (img) this.setState({ imgLoaded: img.complete });
       }
 
       // add/remove event listeners
@@ -902,8 +911,11 @@ var ImgsViewer = function (_Component) {
   }, {
     key: 'preloadImg',
     value: function preloadImg(idx, onload) {
-      var data = this.props.imgs[idx];
-
+      return this.prelaodImgData(this.props.imgs[idx], onload);
+    }
+  }, {
+    key: 'preloadImgData',
+    value: function preloadImgData(data, onload) {
       if (!data) return;
 
       var img = new Image();
@@ -1205,7 +1217,6 @@ var ImgsViewer = function (_Component) {
 }(Component);
 
 ImgsViewer.propTypes = {
-  lang: PropTypes.string,
   backdropCloseable: PropTypes.bool,
   closeBtnTitle: PropTypes.string,
   currImg: PropTypes.number,
@@ -1214,7 +1225,7 @@ ImgsViewer.propTypes = {
   imgCountSeparator: PropTypes.string,
   imgs: PropTypes.arrayOf(PropTypes.shape({
     src: PropTypes.string.isRequired,
-    srcSet: PropTypes.array,
+    srcSet: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
     caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     thumbnail: PropTypes.string
   })).isRequired,
@@ -1239,7 +1250,6 @@ ImgsViewer.propTypes = {
   width: PropTypes.number
 };
 ImgsViewer.defaultProps = {
-  lang: 'zh_CN',
   closeBtnTitle: '关闭（空格键）',
   currImg: 0,
   enableKeyboardInput: true,
@@ -1291,7 +1301,8 @@ var defaultStyles$5 = {
 
     // opacity animation to make spinner appear with delay
     opacity: 0,
-    transition: 'opacity .3s'
+    transition: 'opacity .3s',
+    pointerEvents: 'none'
   },
   spinnerActive: {
     opacity: 1

@@ -22,30 +22,30 @@ function makeUnsplashThumbnail (id, orientation = 'landscape') {
 // https://unsplash.com/collections/369/adventure
 
 const DEFAULT_IMAGES = [
-  { id: '1526382551041-3c817fc3d478', caption: 'Photo by Simon Alexander', orientation: 'square', useForDemo: true },
-  { id: '1522985225914-17a10a58c8ec', caption: 'Photo by Blake Cheek', orientation: 'square', useForDemo: true },
-  { id: '1522931698295-e7b4d3e4188f', caption: 'Photo by Oliver Sjöström', orientation: 'square', useForDemo: true },
-  { id: '1516175663209-ac2459a5652f', caption: 'Photo by Jeremy Bishop', orientation: 'square', useForDemo: true },
-  { id: '1515911601378-97de98db6dda', caption: 'Photo by Emily Reider', orientation: 'square', useForDemo: true },
+  { id: '1526382551041-3c817fc3d478', caption: '照片来自Simon Alexander', orientation: 'square', useForDemo: true },
+  { id: '1522985225914-17a10a58c8ec', caption: '照片来自Blake Cheek', orientation: 'square', useForDemo: true },
+  { id: '1522931698295-e7b4d3e4188f', caption: '照片来自Oliver Sjöström', orientation: 'square', useForDemo: true },
+  { id: '1516175663209-ac2459a5652f', caption: '照片来自Jeremy Bishop', orientation: 'square', useForDemo: true },
+  { id: '1515911601378-97de98db6dda', caption: '照片来自Emily Reider', orientation: 'square', useForDemo: true },
 ]
 const THEMED_IMAGES = [
-  { id: '1506773090264-ac0b07293a64', caption: 'Photo by Dan Grinwis', orientation: 'square', useForDemo: true },
-  { id: '1482398650355-d4c6462afa0e', caption: 'Photo by Andrew Neel', orientation: 'landscape', useForDemo: true },
-  { id: '1514949823529-bdcc933a9339', caption: 'Photo by Kristopher Roller', orientation: 'landscape', useForDemo: true },
-  { id: '1503293962593-47247718a17a', caption: 'Photo by Jeremy Bishop', orientation: 'landscape', useForDemo: true },
-  { id: '1509914398892-963f53e6e2f1', caption: 'Photo by Linus Nylund', orientation: 'landscape', useForDemo: true },
+  { id: '1506773090264-ac0b07293a64', caption: '照片来自Dan Grinwis', orientation: 'square', useForDemo: true },
+  { id: '1482398650355-d4c6462afa0e', caption: '照片来自Andrew Neel', orientation: 'landscape', useForDemo: true },
+  { id: '1514949823529-bdcc933a9339', caption: '照片来自Kristopher Roller', orientation: 'landscape', useForDemo: true },
+  { id: '1503293962593-47247718a17a', caption: '照片来自Jeremy Bishop', orientation: 'landscape', useForDemo: true },
+  { id: '1509914398892-963f53e6e2f1', caption: '照片来自Linus Nylund', orientation: 'landscape', useForDemo: true },
 ]
 const THUMBNAIL_IMAGES = [
-  { id: '1501963422762-3d89bd989568', caption: 'Photo by Jeremy Bishop', orientation: 'landscape', useForDemo: true },
-  { id: '1418846531910-2b7bb1043512', caption: 'Photo by Vincentiu Solomon', orientation: 'landscape', useForDemo: true },
-  { id: '1509529711801-deac231925ac', caption: 'Photo by Joshua Earle', orientation: 'landscape', useForDemo: true },
-  { id: '1499062229216-7c6349e898fb', caption: 'Photo by Leio McLaren', orientation: 'square', useForDemo: true },
-  { id: '1495619744764-2cc11fcbe5f0', caption: 'Photo by Philipp Kämmerer', orientation: 'square', useForDemo: true },
-  { id: '1488584433697-7ccc1148d30c', caption: 'Photo by Flecher Clay', orientation: 'square' },
-  { id: '1478562853135-c3c9e3ef7905', caption: 'Photo by Austin Neil', orientation: 'landscape' },
-  { id: '1476111021705-ac3b3304fe20', caption: 'Photo by Dino Reichmuth', orientation: 'square' },
-  { id: '1478001517127-fccc92f54906', caption: 'Photo by Joshua Earle', orientation: 'landscape' },
-  { id: '1455383333344-451b6147021b', caption: 'Photo by Joshua Earle', orientation: 'landscape' },
+  { id: '1501963422762-3d89bd989568', caption: '照片来自Jeremy Bishop', orientation: 'landscape', useForDemo: true },
+  { id: '1418846531910-2b7bb1043512', caption: '照片来自Vincentiu Solomon', orientation: 'landscape', useForDemo: true },
+  { id: '1509529711801-deac231925ac', caption: '照片来自Joshua Earle', orientation: 'landscape', useForDemo: true },
+  { id: '1499062229216-7c6349e898fb', caption: '照片来自Leio McLaren', orientation: 'square', useForDemo: true },
+  { id: '1495619744764-2cc11fcbe5f0', caption: '照片来自Philipp Kämmerer', orientation: 'square', useForDemo: true },
+  { id: '1488584433697-7ccc1148d30c', caption: '照片来自Flecher Clay', orientation: 'square' },
+  { id: '1478562853135-c3c9e3ef7905', caption: '照片来自Austin Neil', orientation: 'landscape' },
+  { id: '1476111021705-ac3b3304fe20', caption: '照片来自Dino Reichmuth', orientation: 'square' },
+  { id: '1478001517127-fccc92f54906', caption: '照片来自Joshua Earle', orientation: 'landscape' },
+  { id: '1455383333344-451b6147021b', caption: '照片来自Joshua Earle', orientation: 'landscape' },
 ]
 
 const theme = {
@@ -130,7 +130,7 @@ render(
       }))}
     />
 
-    <h3>夹带缩略图</h3>
+    <h3>缩略图同步</h3>
     <Gallery
       imgs={THUMBNAIL_IMAGES.map(({ caption, id, orientation, useForDemo }) => ({
         src: makeUnsplashSrc(id),

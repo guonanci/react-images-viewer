@@ -70,8 +70,8 @@ class ImgsViewer extends Component {
     }
     // preload currImg
     if (this.props.currImg !== nextProps.currImg || !this.props.isOpen && nextProps.isOpen) {
-      const img = this.preloadImg(nextProps.currImg, this.handleImgLoaded)
-      this.setState({ imgLoaded: img.complete })
+      const img = this.preloadImgData(nextProps.imgs[nextProps.currImg], this.handleImgLoaded)
+      if (img) this.setState({ imgLoaded: img.complete })
     }
 
     // add/remove event listeners
@@ -95,8 +95,9 @@ class ImgsViewer extends Component {
   // ====================
 
   preloadImg (idx, onload) {
-    const data = this.props.imgs[idx]
-
+    return this.prelaodImgData(this.props.imgs[idx], onload)
+  }
+  preloadImgData(data, onload) {
     if(!data) return
 
     const img = new Image()
@@ -335,7 +336,6 @@ class ImgsViewer extends Component {
 }
 
 ImgsViewer.propTypes = {
-  lang: PropTypes.string,
   backdropCloseable: PropTypes.bool,
   closeBtnTitle: PropTypes.string,
   currImg: PropTypes.number,
@@ -345,7 +345,7 @@ ImgsViewer.propTypes = {
   imgs: PropTypes.arrayOf(
     PropTypes.shape({
       src: PropTypes.string.isRequired,
-      srcSet: PropTypes.array,
+      srcSet: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
       caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
       thumbnail: PropTypes.string
     })
@@ -371,7 +371,6 @@ ImgsViewer.propTypes = {
   width: PropTypes.number,
 }
 ImgsViewer.defaultProps = {
-  lang: 'zh_CN',
   closeBtnTitle: '关闭（空格键）',
   currImg: 0,
   enableKeyboardInput: true,
@@ -424,6 +423,7 @@ const defaultStyles = {
     // opacity animation to make spinner appear with delay
     opacity: 0,
     transition: 'opacity .3s',
+    pointerEvents: 'none',
   },
   spinnerActive: {
     opacity: 1,

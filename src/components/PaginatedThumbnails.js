@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { css, StyleSheet } from 'aphrodite/no-important';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { css, StyleSheet } from 'aphrodite/no-important'
 
-import Thumbnail from './Thumbnail';
-import Arrow from './Arrow';
-import theme from '../theme';
+import Thumbnail from './Thumbnail'
+import Arrow from './Arrow'
+import theme from '../theme'
 
 const classes = StyleSheet.create({
   paginatedThumbnails: {

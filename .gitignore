@@ -5,6 +5,17 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Build
+# lib
+# dist
+# examples/dist
+
+# Webstorm
+.idea/
+
+# VSCode
+.vscode/
+
 # Runtime data
 pids
 *.pid
@@ -69,3 +80,10 @@ typings/
 
 # next.js build output
 .next
+
+__test__/__snapshots__/
+
+.js.snap
+
+# MacOS generated file
+.DS_Store

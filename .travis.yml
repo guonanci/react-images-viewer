@@ -14,6 +14,7 @@ install:
   npm install --registry https://registry.npmjs.org
 
 script:
+  - npm run lint
   - npm run test
   # - npm run dev
   # - npm run build
