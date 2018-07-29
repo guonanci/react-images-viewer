@@ -1,25 +1,17 @@
 language: node_js
-sudo: true
+sudo: false
 node_js:
   - stable
-# cache:
-#   directories:
-#     - node_modules
-# before_install:
-#   - npm install
+cache:
+  directories:
+    - node_modules
 install:
 |
+  npm install -g yarn
+  npm --version
   yarn
-  # npm install -g npm@latest
-#   npm --version
-#   npm install --registry https://registry.npmjs.org
 
 script:
   - yarn lint
   - yarn test
-  # - npm run dev
-  # - npm run build
-  # - npm run checkdir
-after_script:
   - yarn coverage
-  # Send coverage data to Coveralls after _script: 'cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js'

@@ -93,6 +93,7 @@
   },
   "dependencies": {
     "aphrodite": "^2.2.2",
+    "enzyme-react-adapter-future": "npm:enzyme-react-adapter-future",
     "prop-types": "^15.6.2",
     "react-scrolllock": "^3.0.1",
     "react-transition-group": "^2.4.0"
