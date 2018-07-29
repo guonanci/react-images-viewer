@@ -41,20 +41,20 @@ it('renders with thumbnail correctly',  () => {
   component.setState({ isOpen: true })
   expect(component).toMatchSnapshot()
 })
-it('renders correctly after click',  () => {
-  const component = mount(
-    <ImgsViewer { ...props2 } />
-  )
-  component.setState({ isOpen: true })
-  setTimeout(() => {
-    component.find('figure').first() && component.find('figure').first().simulate('click')
-    expect(component).toMatchSnapshot()
-  }, 10000)
-})
-it('unmount',  () => {
-  const component = mount(
-    <ImgsViewer { ...props2 } />
-  )
-  component.setState({ isOpen: true })
-  component.unmount()
-})
+// it('renders correctly after click',  () => {
+//   const component = mount(
+//     <ImgsViewer { ...props2 } />
+//   )
+//   component.setState({ isOpen: true })
+//   setTimeout(() => {
+//     component.find('figure').first() && component.find('figure').first().simulate('click')
+//     expect(component).toMatchSnapshot()
+//   }, 10000)
+// })
+// it('unmount',  () => {
+//   const component = mount(
+//     <ImgsViewer { ...props2 } />
+//   )
+//   component.setState({ isOpen: true })
+//   component.unmount()
+// })
