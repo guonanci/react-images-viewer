@@ -27,13 +27,13 @@ const props2 = {
     }
   ]
 }
-it('renders correctly',  () => {
-  const component = mount(
-    <ImgsViewer { ...props1 } />
-  )
-  component.setState({ isOpen: true })
-  expect(component).toMatchSnapshot()
-})
+// it('renders correctly',  () => {
+//   const component = mount(
+//     <ImgsViewer { ...props1 } />
+//   )
+//   component.setState({ isOpen: true })
+//   expect(component).toMatchSnapshot()
+// })
 // it('renders with thumbnail correctly',  () => {
 //   const component = mount(
 //     <ImgsViewer { ...props2 } />
