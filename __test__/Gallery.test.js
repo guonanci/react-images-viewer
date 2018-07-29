@@ -3,6 +3,7 @@ import ImgsViewer from '../src/ImgsViewer'
 import { mount } from 'enzyme'
 
 const props1 = {
+  onClose: () => {},
   imgs: [
     {
       src: 'https://images.unsplash.com/photo-1526382551041-3c817fc3d478?dpr=2&auto=format&w=1024&h=1024'
@@ -14,6 +15,7 @@ const props1 = {
   ]
 }
 const props2 = {
+  onClose: () => {},
   imgs: [
     {
       src: 'https://images.unsplash.com/photo-1522931698295-e7b4d3e4188f?dpr=2&auto=format&w=1024&h=1024',
