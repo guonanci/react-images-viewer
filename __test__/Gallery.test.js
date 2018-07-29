@@ -34,13 +34,13 @@ it('renders correctly',  () => {
   component.setState({ isOpen: true })
   expect(component).toMatchSnapshot()
 })
-it('renders with thumbnail correctly',  () => {
-  const component = mount(
-    <ImgsViewer { ...props2 } />
-  )
-  component.setState({ isOpen: true })
-  expect(component).toMatchSnapshot()
-})
+// it('renders with thumbnail correctly',  () => {
+//   const component = mount(
+//     <ImgsViewer { ...props2 } />
+//   )
+//   component.setState({ isOpen: true })
+//   expect(component).toMatchSnapshot()
+// })
 // it('renders correctly after click',  () => {
 //   const component = mount(
 //     <ImgsViewer { ...props2 } />
