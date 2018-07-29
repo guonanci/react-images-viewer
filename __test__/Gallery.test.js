@@ -27,6 +27,9 @@ const props2 = {
     }
   ]
 }
+it('sum', () => {
+  expect(1 + 1).toBe(2)
+})
 // it('renders correctly',  () => {
 //   const component = mount(
 //     <ImgsViewer { ...props1 } />
