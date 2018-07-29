@@ -2,16 +2,16 @@ language: node_js
 sudo: true
 node_js:
   - stable
-cache:
-  directories:
-    - node_modules
-before_install:
-  - npm install
-install:
-|
-  npm install -g npm@latest
-  npm --version
-  npm install --registry https://registry.npmjs.org
+# cache:
+#   directories:
+#     - node_modules
+# before_install:
+#   - npm install
+# install:
+# |
+#   npm install -g npm@latest
+#   npm --version
+#   npm install --registry https://registry.npmjs.org
 
 script:
   - npm run lint
