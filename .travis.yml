@@ -7,18 +7,19 @@ node_js:
 #     - node_modules
 # before_install:
 #   - npm install
-# install:
-# |
-#   npm install -g npm@latest
+install:
+|
+  yarn
+  # npm install -g npm@latest
 #   npm --version
 #   npm install --registry https://registry.npmjs.org
 
 script:
-  - npm run lint
-  - npm run test
+  - yarn lint
+  - yarn test
   # - npm run dev
   # - npm run build
   # - npm run checkdir
 after_script:
-  - npm run coverage
+  - yarn coverage
   # Send coverage data to Coveralls after _script: 'cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js'
