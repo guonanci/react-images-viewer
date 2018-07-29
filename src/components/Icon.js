@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import arrowLeft from '../icons/arrowLeft'
-import arrowRight from '../icons/arrowRight'
-import close from '../icons/close'
+import arrowLeft from '../icons/ArrowLeft'
+import arrowRight from '../icons/ArrowRight'
+import close from '../icons/Close'
 
 const icons = { arrowLeft, arrowRight, close }
 
