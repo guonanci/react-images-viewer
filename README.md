@@ -1,7 +1,7 @@
 # react-images-viewer
 
 [![Build Status](https://travis-ci.org/guonanci/react-images-viewer.svg?branch=master)](https://travis-ci.org/guonanci/react-images-viewer)
-[![Coverage Status](https://coveralls.io/repos/github/guonanci/react-images-viewer/badge.svg?branch=master)](https://coveralls.io/github/guonanci/react-images-viewer?branch=master)
+<!-- [![Coverage Status](https://coveralls.io/repos/github/guonanci/react-images-viewer/badge.svg?branch=master)](https://coveralls.io/github/guonanci/react-images-viewer?branch=master) -->
 [![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
 
 A react library that view photos list easily, and a simple, responsive viewer component for displaying an array of images.
