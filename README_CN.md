@@ -46,7 +46,7 @@ export default class Demo extends React.Component {
 线上案例: [guonanci.github.io/react-images-viewer](https://guonanci.github.io/react-images-viewer)
 
 ```bash
-#yarn install
+yarn install
 yarn
 yarn start
 ```
