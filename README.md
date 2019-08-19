@@ -93,7 +93,7 @@ backdropCloseable | bool | false | Allow users to exit the viewer by clicking th
 closeBtnTitle | str | '关闭（空格键）' | Customize close esc title
 enableKeyboardInput | bool | true | Supports keyboard input - <code>space, esc</code>, <code> arrow left, arrow up</code>, and <code>arrow right, arrow down</code>
 currImg | num | 0 | Required if you want to navigate the imgsViewer, The index of the image to display initially
-customCtrls | arr | undefined | An array of elements to display as custom controls on the top of viewer
+customControls | arr | undefined | An array of elements to display as custom controls on the top of viewer
 imgs | arr | undefined | Required. Array of image objects, See img opts table below
 imgCountSeparator | str | ' / ' | Customize separator in the image count
 isOpen | bool | false | Required if you want to navigate the imgsViewer, Whether or not the viewer is displayed
