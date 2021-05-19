@@ -738,7 +738,11 @@ var Portal = function (_Component) {
           React.createElement(
             CSSTransition,
             { timeout: { enter: duration, exit: duration }, className: 'fade' },
-            this.props.children
+            React.createElement(
+              'div',
+              null,
+              this.props.children
+            )
           )
         )
       ), this.portalElement);
@@ -843,20 +847,22 @@ var ImgsViewer = function (_Component) {
 
     _this.theme = deepMerge(theme, _this.props.theme);
     _this.classes = StyleSheet$1.create(deepMerge(defaultStyles$5, _this.props.theme));
-    _this.state = { imgLoaded: false };
+    _this.state = {
+      imgLoaded: false
+    };
 
-    bindFunctions.call(_this, ['gotoNext', 'gotoPrev', 'closeBackdrop', 'handleKeyboardInput', 'handleImgLoaded']);
+    bindFunctions.call(_this, ["gotoNext", "gotoPrev", "closeBackdrop", "handleKeyboardInput", "handleImgLoaded"]);
     return _this;
   }
 
   createClass(ImgsViewer, [{
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       if (this.props.isOpen) {
         if (this.props.enableKeyboardInput) {
-          window.addEventListener('keydown', this.handleKeyboardInput);
+          window.addEventListener("keydown", this.handleKeyboardInput);
         }
-        if (typeof this.props.currImg === 'number') {
+        if (typeof this.props.currImg === "number") {
           this.preloadImg(this.props.currImg, this.handleImgLoaded);
         }
       }
@@ -864,7 +870,7 @@ var ImgsViewer = function (_Component) {
     // static getDerivedStateFromProps (nextProps, prevState) {
 
   }, {
-    key: 'UNSAFE_componentWillReceiveProps',
+    key: "UNSAFE_componentWillReceiveProps",
     value: function UNSAFE_componentWillReceiveProps(nextProps) {
       if (!canUseDom) return;
 
@@ -883,24 +889,26 @@ var ImgsViewer = function (_Component) {
       // preload currImg
       if (this.props.currImg !== nextProps.currImg || !this.props.isOpen && nextProps.isOpen) {
         var img = this.preloadImgData(nextProps.imgs[nextProps.currImg], this.handleImgLoaded);
-        if (img) this.setState({ imgLoaded: img.complete });
+        if (img) this.setState({
+          imgLoaded: img.complete
+        });
       }
 
       // add/remove event listeners
       if (!this.props.isOpen && nextProps.isOpen && nextProps.enableKeyboardInput) {
-        window.addEventListener('keydown', this.handleKeyboardInput);
+        window.addEventListener("keydown", this.handleKeyboardInput);
       }
       if (!nextProps.isOpen && nextProps.enableKeyboardInput) {
-        window.removeEventListener('keydown', this.handleKeyboardInput);
+        window.removeEventListener("keydown", this.handleKeyboardInput);
       }
 
       return null;
     }
   }, {
-    key: 'componentWillUnmount',
+    key: "componentWillUnmount",
     value: function componentWillUnmount() {
       if (this.props.enableKeyboardInput) {
-        window.removeEventListener('keydown', this.handleKeyboardInput);
+        window.removeEventListener("keydown", this.handleKeyboardInput);
       }
     }
 
@@ -909,12 +917,12 @@ var ImgsViewer = function (_Component) {
     // ====================
 
   }, {
-    key: 'preloadImg',
+    key: "preloadImg",
     value: function preloadImg(idx, onload) {
       return this.preloadImgData(this.props.imgs[idx], onload);
     }
   }, {
-    key: 'preloadImgData',
+    key: "preloadImgData",
     value: function preloadImgData(data, onload) {
       if (!data) return;
 
@@ -931,7 +939,7 @@ var ImgsViewer = function (_Component) {
       return img;
     }
   }, {
-    key: 'gotoNext',
+    key: "gotoNext",
     value: function gotoNext(event) {
       var _props = this.props,
           currImg = _props.currImg,
@@ -949,7 +957,7 @@ var ImgsViewer = function (_Component) {
       this.props.onClickNext();
     }
   }, {
-    key: 'gotoPrev',
+    key: "gotoPrev",
     value: function gotoPrev(event) {
       var currImg = this.props.currImg;
       var imgLoaded = this.state.imgLoaded;
@@ -965,14 +973,14 @@ var ImgsViewer = function (_Component) {
       this.props.onClickPrev();
     }
   }, {
-    key: 'closeBackdrop',
+    key: "closeBackdrop",
     value: function closeBackdrop(event) {
-      if (event.target.id === 'viewerBackdrop' || event.target.tagName === 'FIGURE') {
+      if (event.target.id === "viewerBackdrop" || event.target.tagName === "FIGURE") {
         this.props.onClose();
       }
     }
   }, {
-    key: 'handleKeyboardInput',
+    key: "handleKeyboardInput",
     value: function handleKeyboardInput(event) {
       var keyCode = event.keyCode;
 
@@ -992,9 +1000,11 @@ var ImgsViewer = function (_Component) {
       return false;
     }
   }, {
-    key: 'handleImgLoaded',
+    key: "handleImgLoaded",
     value: function handleImgLoaded() {
-      this.setState({ imgLoaded: true });
+      this.setState({
+        imgLoaded: true
+      });
     }
 
     // ====================
@@ -1002,35 +1012,35 @@ var ImgsViewer = function (_Component) {
     // ====================
 
   }, {
-    key: 'renderArrowPrev',
+    key: "renderArrowPrev",
     value: function renderArrowPrev(theme$$1) {
       if (this.props.currImg === 0) return null;
 
       return React.createElement(Arrow, {
         theme: theme$$1,
-        direction: 'left',
-        icon: 'arrowLeft',
+        direction: "left",
+        icon: "arrowLeft",
         onClick: this.gotoPrev,
         title: this.props.leftArrowTitle,
-        type: 'button'
+        type: "button"
       });
     }
   }, {
-    key: 'renderArrowNext',
+    key: "renderArrowNext",
     value: function renderArrowNext(theme$$1) {
       if (this.props.currImg === this.props.imgs.length - 1) return null;
 
       return React.createElement(Arrow, {
         theme: theme$$1,
-        direction: 'right',
-        icon: 'arrowRight',
+        direction: "right",
+        icon: "arrowRight",
         onClick: this.gotoNext,
         title: this.props.rightArrowTitle,
-        type: 'button'
+        type: "button"
       });
     }
   }, {
-    key: 'renderDialog',
+    key: "renderDialog",
     value: function renderDialog() {
       var _this2 = this;
 
@@ -1042,7 +1052,7 @@ var ImgsViewer = function (_Component) {
       var imgLoaded = this.state.imgLoaded;
 
 
-      if (!isOpen) return React.createElement('span', { key: 'closed' });
+      if (!isOpen) return React.createElement("span", { key: "closed" });
 
       var offsetThumbnails = showThumbnails ? this.theme.thumbnail.size + this.theme.container.gutter.vertical : 0;
 
@@ -1054,7 +1064,7 @@ var ImgsViewer = function (_Component) {
             Container,
             {
               theme: theme$$1,
-              key: 'open',
+              key: "open",
               onClick: backdropCloseable && _this2.closeBackdrop,
               onTouchEnd: backdropCloseable && _this2.closeBackdrop
             },
@@ -1062,11 +1072,19 @@ var ImgsViewer = function (_Component) {
               Fragment,
               null,
               React.createElement(
-                'div',
-                { className: css$1(_this2.classes.content), style: { marginBottom: offsetThumbnails, maxWidth: width } },
+                "div",
+                {
+                  className: css$1(_this2.classes.content),
+                  style: {
+                    marginBottom: offsetThumbnails,
+                    maxWidth: width
+                  }
+                },
                 imgLoaded && _this2.renderHeader(theme$$1),
+                " ",
                 _this2.renderImgs(),
                 _this2.renderSpinner(),
+                " ",
                 imgLoaded && _this2.renderFooter(theme$$1)
               ),
               imgLoaded && _this2.renderThumbnails(theme$$1),
@@ -1079,7 +1097,7 @@ var ImgsViewer = function (_Component) {
       );
     }
   }, {
-    key: 'renderImgs',
+    key: "renderImgs",
     value: function renderImgs() {
       var _props3 = this.props,
           currImg = _props3.currImg,
@@ -1093,15 +1111,15 @@ var ImgsViewer = function (_Component) {
 
       var img = imgs[currImg];
       var sourceSet = normalizeSourceSet(img);
-      var sizes = sourceSet ? '100vw' : null;
+      var sizes = sourceSet ? "100vw" : null;
 
       var thumbnailsSize = showThumbnails ? this.theme.thumbnail.size : 0;
-      var heightOffset = this.theme.header.height + this.theme.footer.height + thumbnailsSize + this.theme.container.gutter.vertical + 'px';
+      var heightOffset = this.theme.header.height + this.theme.footer.height + thumbnailsSize + this.theme.container.gutter.vertical + "px";
 
       return React.createElement(
-        'figure',
+        "figure",
         { className: css$1(this.classes.figure) },
-        React.createElement('img', {
+        React.createElement("img", {
           className: css$1(this.classes.img, imgLoaded && this.classes.imgLoaded),
           onClick: onClickImg,
           sizes: sizes,
@@ -1109,14 +1127,14 @@ var ImgsViewer = function (_Component) {
           src: img.src,
           srcSet: sourceSet,
           style: {
-            cursor: onClickImg ? 'pointer' : 'auto',
-            maxHeight: 'calc(100vh - ' + heightOffset
+            cursor: onClickImg ? "pointer" : "auto",
+            maxHeight: "calc(100vh - " + heightOffset
           }
         })
       );
     }
   }, {
-    key: 'renderThumbnails',
+    key: "renderThumbnails",
     value: function renderThumbnails(theme$$1) {
       var _props4 = this.props,
           imgs = _props4.imgs,
@@ -1141,7 +1159,7 @@ var ImgsViewer = function (_Component) {
       });
     }
   }, {
-    key: 'renderHeader',
+    key: "renderHeader",
     value: function renderHeader(theme$$1) {
       var _props5 = this.props,
           closeBtnTitle = _props5.closeBtnTitle,
@@ -1159,7 +1177,7 @@ var ImgsViewer = function (_Component) {
       });
     }
   }, {
-    key: 'renderFooter',
+    key: "renderFooter",
     value: function renderFooter(theme$$1) {
       var _props6 = this.props,
           currImg = _props6.currImg,
@@ -1180,27 +1198,27 @@ var ImgsViewer = function (_Component) {
       });
     }
   }, {
-    key: 'renderSpinner',
+    key: "renderSpinner",
     value: function renderSpinner() {
       var _props7 = this.props,
           spinner = _props7.spinner,
+          spinnerDisabled = _props7.spinnerDisabled,
           spinnerColor = _props7.spinnerColor,
           spinnerSize = _props7.spinnerSize;
       var imgLoaded = this.state.imgLoaded;
 
       var Spinner$$1 = spinner;
-
+      if (spinnerDisabled) return null;
       return React.createElement(
-        'div',
-        { className: css$1(this.classes.spinner, !imgLoaded && this.classes.spinnerActive) },
-        React.createElement(Spinner$$1, {
-          color: spinnerColor,
-          size: spinnerSize
-        })
+        "div",
+        {
+          className: css$1(this.classes.spinner, !imgLoaded && this.classes.spinnerActive)
+        },
+        React.createElement(Spinner$$1, { color: spinnerColor, size: spinnerSize })
       );
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render$$1() {
       return React.createElement(
         ThemeContext.Provider,
@@ -1208,7 +1226,9 @@ var ImgsViewer = function (_Component) {
         React.createElement(
           Portal,
           null,
-          this.renderDialog()
+          " ",
+          this.renderDialog(),
+          " "
         )
       );
     }
@@ -1242,6 +1262,7 @@ ImgsViewer.propTypes = {
   showCloseBtn: PropTypes.bool,
   showImgCount: PropTypes.bool,
   showThumbnails: PropTypes.bool,
+  spinnerDisabled: PropTypes.bool,
   spinner: PropTypes.func,
   spinnerColor: PropTypes.string,
   spinnerSize: PropTypes.number,
@@ -1250,19 +1271,20 @@ ImgsViewer.propTypes = {
   width: PropTypes.number
 };
 ImgsViewer.defaultProps = {
-  closeBtnTitle: '关闭（空格键）',
+  closeBtnTitle: "关闭（空格键）",
   currImg: 0,
   enableKeyboardInput: true,
-  imgCountSeparator: ' / ',
-  leftArrowTitle: '上一张（向左键）',
+  imgCountSeparator: " / ",
+  leftArrowTitle: "上一张（向左键）",
   onClickShowNextImg: true,
   preloadNextImg: true,
   preventScroll: true,
-  rightArrowTitle: '下一张（向右键）',
+  rightArrowTitle: "下一张（向右键）",
   showCloseBtn: true,
   showImgCount: true,
+  spinnerDisabled: false,
   spinner: Spinner,
-  spinnerColor: '#fff',
+  spinnerColor: "#fff",
   spinnerSize: 50,
   theme: {},
   thumbnailOffset: 2,
@@ -1271,38 +1293,38 @@ ImgsViewer.defaultProps = {
 
 var defaultStyles$5 = {
   content: {
-    position: 'relative'
+    position: "relative"
   },
   figure: {
     margin: 0 // remove browser default
   },
   img: {
-    display: 'block', // removes browser default gutter
-    height: 'auto',
-    margin: '0 auto', // main center on very short screens or very narrow img
-    maxWidth: '100%',
+    display: "block", // removes browser default gutter
+    height: "auto",
+    margin: "0 auto", // main center on very short screens or very narrow img
+    maxWidth: "100%",
 
     // disable user select
-    WebkitTouchCallout: 'none',
-    userSelect: 'none',
+    WebkitTouchCallout: "none",
+    userSelect: "none",
 
     // opacity animation on image load
     opacity: 0,
-    transition: 'opacity .3s'
+    transition: "opacity .3s"
   },
   imgLoaded: {
     opacity: 1
   },
   spinner: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
 
     // opacity animation to make spinner appear with delay
     opacity: 0,
-    transition: 'opacity .3s',
-    pointerEvents: 'none'
+    transition: "opacity .3s",
+    pointerEvents: "none"
   },
   spinnerActive: {
     opacity: 1
