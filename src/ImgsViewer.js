@@ -1,18 +1,18 @@
-import PropTypes from 'prop-types'
-import React, { Component, Fragment } from 'react'
-import { StyleSheet, css } from 'aphrodite'
-import ScrollLock from 'react-scrolllock'
+import PropTypes from "prop-types"
+import React, { Component, Fragment } from "react"
+import { StyleSheet, css } from "aphrodite"
+import ScrollLock from "react-scrolllock"
 
-import defaultTheme from './theme'
-import Arrow from './components/Arrow'
-import Container from './components/Container'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import PaginatedThumbnails from './components/PaginatedThumbnails'
-import Portal from './components/Portal'
-import DefaultSpinner from './components/Spinner'
+import defaultTheme from "./theme"
+import Arrow from "./components/Arrow"
+import Container from "./components/Container"
+import Footer from "./components/Footer"
+import Header from "./components/Header"
+import PaginatedThumbnails from "./components/PaginatedThumbnails"
+import Portal from "./components/Portal"
+import DefaultSpinner from "./components/Spinner"
 
-import { bindFunctions, canUseDom, deepMerge } from './utils/util'
+import { bindFunctions, canUseDom, deepMerge } from "./utils/util"
 
 function normalizeSourceSet(data) {
   const sourceSet = data.srcSet || data.srcset
@@ -27,33 +27,37 @@ function normalizeSourceSet(data) {
 const ThemeContext = React.createContext(defaultTheme)
 
 class ImgsViewer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.theme = deepMerge(defaultTheme, this.props.theme)
-    this.classes = StyleSheet.create(deepMerge(defaultStyles, this.props.theme))
-    this.state = { imgLoaded: false }
+    this.classes = StyleSheet.create(
+      deepMerge(defaultStyles, this.props.theme)
+    )
+    this.state = {
+      imgLoaded: false,
+    }
 
     bindFunctions.call(this, [
-      'gotoNext',
-      'gotoPrev',
-      'closeBackdrop',
-      'handleKeyboardInput',
-      'handleImgLoaded'
+      "gotoNext",
+      "gotoPrev",
+      "closeBackdrop",
+      "handleKeyboardInput",
+      "handleImgLoaded",
     ])
   }
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.isOpen) {
       if (this.props.enableKeyboardInput) {
-        window.addEventListener('keydown', this.handleKeyboardInput)
+        window.addEventListener("keydown", this.handleKeyboardInput)
       }
-      if (typeof this.props.currImg === 'number') {
+      if (typeof this.props.currImg === "number") {
         this.preloadImg(this.props.currImg, this.handleImgLoaded)
       }
     }
   }
   // static getDerivedStateFromProps (nextProps, prevState) {
-  UNSAFE_componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (!canUseDom) return
 
     // const instance = this
@@ -69,24 +73,37 @@ class ImgsViewer extends Component {
       this.preloadImg(nextIdx)
     }
     // preload currImg
-    if (this.props.currImg !== nextProps.currImg || !this.props.isOpen && nextProps.isOpen) {
-      const img = this.preloadImgData(nextProps.imgs[nextProps.currImg], this.handleImgLoaded)
-      if (img) this.setState({ imgLoaded: img.complete })
+    if (
+      this.props.currImg !== nextProps.currImg ||
+      (!this.props.isOpen && nextProps.isOpen)
+    ) {
+      const img = this.preloadImgData(
+        nextProps.imgs[nextProps.currImg],
+        this.handleImgLoaded
+      )
+      if (img)
+        this.setState({
+          imgLoaded: img.complete,
+        })
     }
 
     // add/remove event listeners
-    if (!this.props.isOpen && nextProps.isOpen && nextProps.enableKeyboardInput) {
-      window.addEventListener('keydown', this.handleKeyboardInput)
+    if (
+      !this.props.isOpen &&
+      nextProps.isOpen &&
+      nextProps.enableKeyboardInput
+    ) {
+      window.addEventListener("keydown", this.handleKeyboardInput)
     }
     if (!nextProps.isOpen && nextProps.enableKeyboardInput) {
-      window.removeEventListener('keydown', this.handleKeyboardInput)
+      window.removeEventListener("keydown", this.handleKeyboardInput)
     }
 
     return null
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.props.enableKeyboardInput) {
-      window.removeEventListener('keydown', this.handleKeyboardInput)
+      window.removeEventListener("keydown", this.handleKeyboardInput)
     }
   }
 
@@ -94,11 +111,11 @@ class ImgsViewer extends Component {
   // Methods
   // ====================
 
-  preloadImg (idx, onload) {
+  preloadImg(idx, onload) {
     return this.preloadImgData(this.props.imgs[idx], onload)
   }
   preloadImgData(data, onload) {
-    if(!data) return
+    if (!data) return
 
     const img = new Image()
     const sourceSet = normalizeSourceSet(data)
@@ -111,13 +128,12 @@ class ImgsViewer extends Component {
     if (sourceSet) img.srcset = sourceSet
 
     return img
-
   }
-  gotoNext (event) {
+  gotoNext(event) {
     const { currImg, imgs } = this.props
     const { imgLoaded } = this.state
 
-    if (!imgLoaded || currImg === (imgs.length - 1)) return
+    if (!imgLoaded || currImg === imgs.length - 1) return
 
     if (event) {
       event.preventDefault()
@@ -126,7 +142,7 @@ class ImgsViewer extends Component {
 
     this.props.onClickNext()
   }
-  gotoPrev (event) {
+  gotoPrev(event) {
     const { currImg } = this.props
     const { imgLoaded } = this.state
 
@@ -139,34 +155,42 @@ class ImgsViewer extends Component {
 
     this.props.onClickPrev()
   }
-  closeBackdrop (event) {
-    if (event.target.id === 'viewerBackdrop' || event.target.tagName === 'FIGURE') {
+  closeBackdrop(event) {
+    if (
+      event.target.id === "viewerBackdrop" ||
+      event.target.tagName === "FIGURE"
+    ) {
       this.props.onClose()
     }
   }
-  handleKeyboardInput (event) {
+  handleKeyboardInput(event) {
     const { keyCode } = event
-    if (keyCode === 37 || keyCode === 33 || keyCode === 38) { // left, pageup, up
+    if (keyCode === 37 || keyCode === 33 || keyCode === 38) {
+      // left, pageup, up
       this.gotoPrev(event)
       return true
-    } else if (keyCode === 39 || keyCode === 34 || keyCode === 40) { // right, pagedown, down
+    } else if (keyCode === 39 || keyCode === 34 || keyCode === 40) {
+      // right, pagedown, down
       this.gotoNext(event)
       return true
-    } else if (keyCode === 27 || keyCode === 32) { // esc, space
+    } else if (keyCode === 27 || keyCode === 32) {
+      // esc, space
       this.props.onClose()
       return true
     }
     return false
   }
-  handleImgLoaded () {
-    this.setState({ imgLoaded: true })
+  handleImgLoaded() {
+    this.setState({
+      imgLoaded: true,
+    })
   }
 
   // ====================
   // Renderers
   // ====================
 
-  renderArrowPrev (theme) {
+  renderArrowPrev(theme) {
     if (this.props.currImg === 0) return null
 
     return (
@@ -180,8 +204,8 @@ class ImgsViewer extends Component {
       />
     )
   }
-  renderArrowNext (theme) {
-    if (this.props.currImg === (this.props.imgs.length - 1)) return null
+  renderArrowNext(theme) {
+    if (this.props.currImg === this.props.imgs.length - 1) return null
 
     return (
       <Arrow
@@ -194,18 +218,21 @@ class ImgsViewer extends Component {
       />
     )
   }
-  renderDialog () {
-    const { backdropCloseable, isOpen, showThumbnails, width, } = this.props
+  renderDialog() {
+    const { backdropCloseable, isOpen, showThumbnails, width } = this.props
 
     const { imgLoaded } = this.state
 
     if (!isOpen) return <span key="closed" />
 
-    const offsetThumbnails = showThumbnails ? this.theme.thumbnail.size + this.theme.container.gutter.vertical : 0
+    const offsetThumbnails = showThumbnails
+      ? this.theme.thumbnail.size + this.theme.container.gutter.vertical
+      : 0
 
     return (
       <ThemeContext.Consumer>
-        {theme => (
+
+        {(theme) => (
           <Container
             theme={theme}
             key="open"
@@ -213,11 +240,16 @@ class ImgsViewer extends Component {
             onTouchEnd={backdropCloseable && this.closeBackdrop}
           >
             <Fragment>
-              <div className={css(this.classes.content)} style={{ marginBottom: offsetThumbnails, maxWidth: width }}>
-                {imgLoaded && this.renderHeader(theme)}
-                {this.renderImgs()}
-                {this.renderSpinner()}
-                {imgLoaded && this.renderFooter(theme)}
+              <div
+                className={css(this.classes.content)}
+                style={{
+                  marginBottom: offsetThumbnails,
+                  maxWidth: width,
+                }}
+              >
+
+                {imgLoaded && this.renderHeader(theme)} {this.renderImgs()}
+                {this.renderSpinner()} {imgLoaded && this.renderFooter(theme)}
               </div>
               {imgLoaded && this.renderThumbnails(theme)}
               {imgLoaded && this.renderArrowPrev(theme)}
@@ -229,7 +261,7 @@ class ImgsViewer extends Component {
       </ThemeContext.Consumer>
     )
   }
-  renderImgs () {
+  renderImgs() {
     const { currImg, imgs, onClickImg, showThumbnails } = this.props
 
     const { imgLoaded } = this.state
@@ -238,16 +270,18 @@ class ImgsViewer extends Component {
 
     const img = imgs[currImg]
     const sourceSet = normalizeSourceSet(img)
-    const sizes = sourceSet ? '100vw' : null
+    const sizes = sourceSet ? "100vw" : null
 
     const thumbnailsSize = showThumbnails ? this.theme.thumbnail.size : 0
-    const heightOffset = `${this.theme.header.height + this.theme.footer.height + thumbnailsSize + (this.theme.container.gutter.vertical)}px`
+    const heightOffset = `${
+      this.theme.header.height +
+      this.theme.footer.height +
+      thumbnailsSize +
+      this.theme.container.gutter.vertical
+    }px`
 
     return (
       <figure className={css(this.classes.figure)}>
-        {/* Re-implement when react warning 'unknown props'
-        https://fb.me/react-unknown-props is resolved
-        <Swipeable onSwipedLeft={this.gotonext} onSwipedRight={this.gotoPrev} /> */}
         <img
           className={css(this.classes.img, imgLoaded && this.classes.imgLoaded)}
           onClick={onClickImg}
@@ -256,15 +290,23 @@ class ImgsViewer extends Component {
           src={img.src}
           srcSet={sourceSet}
           style={{
-            cursor: onClickImg ? 'pointer' : 'auto',
+            cursor: onClickImg ? "pointer" : "auto",
             maxHeight: `calc(100vh - ${heightOffset}`,
           }}
         />
       </figure>
     )
   }
-  renderThumbnails (theme) {
-    const { imgs, currImg, leftArrowTitle, rightArrowTitle, onClickThumbnail, showThumbnails, thumbnailOffset } = this.props
+  renderThumbnails(theme) {
+    const {
+      imgs,
+      currImg,
+      leftArrowTitle,
+      rightArrowTitle,
+      onClickThumbnail,
+      showThumbnails,
+      thumbnailOffset,
+    } = this.props
 
     if (!showThumbnails) return null
 
@@ -280,7 +322,7 @@ class ImgsViewer extends Component {
       />
     )
   }
-  renderHeader (theme) {
+  renderHeader(theme) {
     const { closeBtnTitle, customControls, onClose, showCloseBtn } = this.props
 
     return (
@@ -293,7 +335,7 @@ class ImgsViewer extends Component {
       />
     )
   }
-  renderFooter (theme) {
+  renderFooter(theme) {
     const { currImg, imgs, imgCountSeparator, showImgCount } = this.props
 
     if (!imgs || !imgs.length) return null
@@ -309,27 +351,27 @@ class ImgsViewer extends Component {
       />
     )
   }
-  renderSpinner () {
-    const { spinner, spinnerColor, spinnerSize } = this.props
+  renderSpinner() {
+    const { spinner, spinnerDisabled, spinnerColor, spinnerSize } = this.props
 
     const { imgLoaded } = this.state
     const Spinner = spinner
-
+    if (spinnerDisabled) return null
     return (
-      <div className={css(this.classes.spinner, !imgLoaded && this.classes.spinnerActive)}>
-        <Spinner
-          color={spinnerColor}
-          size={spinnerSize}
-        />
+      <div
+        className={css(
+          this.classes.spinner,
+          !imgLoaded && this.classes.spinnerActive
+        )}
+      >
+        <Spinner color={spinnerColor} size={spinnerSize} />
       </div>
     )
   }
-  render () {
+  render() {
     return (
       <ThemeContext.Provider value={this.props.theme}>
-        <Portal>
-          {this.renderDialog()}
-        </Portal>
+        <Portal> {this.renderDialog()} </Portal>
       </ThemeContext.Provider>
     )
   }
@@ -347,7 +389,7 @@ ImgsViewer.propTypes = {
       src: PropTypes.string.isRequired,
       srcSet: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
       caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-      thumbnail: PropTypes.string
+      thumbnail: PropTypes.string,
     })
   ).isRequired,
   isOpen: PropTypes.bool,
@@ -363,6 +405,7 @@ ImgsViewer.propTypes = {
   showCloseBtn: PropTypes.bool,
   showImgCount: PropTypes.bool,
   showThumbnails: PropTypes.bool,
+  spinnerDisabled: PropTypes.bool,
   spinner: PropTypes.func,
   spinnerColor: PropTypes.string,
   spinnerSize: PropTypes.number,
@@ -371,19 +414,20 @@ ImgsViewer.propTypes = {
   width: PropTypes.number,
 }
 ImgsViewer.defaultProps = {
-  closeBtnTitle: '关闭（空格键）',
+  closeBtnTitle: "关闭（空格键）",
   currImg: 0,
   enableKeyboardInput: true,
-  imgCountSeparator: ' / ',
-  leftArrowTitle: '上一张（向左键）',
+  imgCountSeparator: " / ",
+  leftArrowTitle: "上一张（向左键）",
   onClickShowNextImg: true,
   preloadNextImg: true,
   preventScroll: true,
-  rightArrowTitle: '下一张（向右键）',
+  rightArrowTitle: "下一张（向右键）",
   showCloseBtn: true,
   showImgCount: true,
+  spinnerDisabled: false,
   spinner: DefaultSpinner,
-  spinnerColor: '#fff',
+  spinnerColor: "#fff",
   spinnerSize: 50,
   theme: {},
   thumbnailOffset: 2,
@@ -392,42 +436,42 @@ ImgsViewer.defaultProps = {
 
 const defaultStyles = {
   content: {
-    position: 'relative',
+    position: "relative",
   },
   figure: {
     margin: 0, // remove browser default
   },
   img: {
-    display: 'block', // removes browser default gutter
-    height: 'auto',
-    margin: '0 auto', // main center on very short screens or very narrow img
-    maxWidth: '100%',
+    display: "block", // removes browser default gutter
+    height: "auto",
+    margin: "0 auto", // main center on very short screens or very narrow img
+    maxWidth: "100%",
 
     // disable user select
-    WebkitTouchCallout: 'none',
-    userSelect: 'none',
+    WebkitTouchCallout: "none",
+    userSelect: "none",
 
     // opacity animation on image load
     opacity: 0,
-    transition: 'opacity .3s',
+    transition: "opacity .3s",
   },
   imgLoaded: {
     opacity: 1,
   },
   spinner: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
 
     // opacity animation to make spinner appear with delay
     opacity: 0,
-    transition: 'opacity .3s',
-    pointerEvents: 'none',
+    transition: "opacity .3s",
+    pointerEvents: "none",
   },
   spinnerActive: {
     opacity: 1,
-  }
+  },
 }
 
 export default ImgsViewer
