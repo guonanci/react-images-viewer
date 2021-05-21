@@ -1,6 +1,6 @@
 {
   "name": "react-images-viewer",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Create an react-images-viewer component.",
   "main": "lib/ImgsViewer.js",
   "jsnext:main": "dist/react-images-viewer.es.js",
@@ -60,7 +60,7 @@
     "coveralls": "^3.0.2",
     "css-loader": "^1.0.0",
     "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "npm:enzyme-react-adapter-future",
+    "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^5.1.0",
     "eslint-plugin-react": "^7.10.0",
     "html-loader": "^0.5.5",
@@ -93,7 +93,6 @@
   },
   "dependencies": {
     "aphrodite": "^2.2.2",
-    "enzyme-react-adapter-future": "npm:enzyme-react-adapter-future",
     "prop-types": "^15.6.2",
     "react-scrolllock": "^3.0.1",
     "react-transition-group": "^2.4.0"
