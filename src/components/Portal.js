@@ -10,9 +10,9 @@ export default class Portal extends Component {
     this.portalElement = null
   }
   componentDidMount() {
-    const p = document.createElement('div')
-    document.body.appendChild(p)
-    this.portalElement = p
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    this.portalElement = div
     this.componentDidUpdate()
   }
   componentDidUpdate() {
@@ -48,5 +48,5 @@ export default class Portal extends Component {
 }
 
 Portal.propTypes = {
-  children: PropsTypes.element,
+  children: PropsTypes.arrayOf(PropsTypes.any),
 }
