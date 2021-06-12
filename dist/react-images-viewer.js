@@ -714,9 +714,9 @@
     createClass(Portal, [{
       key: 'componentDidMount',
       value: function componentDidMount() {
-        var p = document.createElement('div');
-        document.body.appendChild(p);
-        this.portalElement = p;
+        var div = document.createElement('div');
+        document.body.appendChild(div);
+        this.portalElement = div;
         this.componentDidUpdate();
       }
     }, {
@@ -766,7 +766,7 @@
 
 
   Portal.propTypes = {
-    children: PropTypes.element
+    children: PropTypes.arrayOf(PropTypes.any)
   };
 
   var Spinner = function Spinner(props) {
@@ -1273,15 +1273,12 @@
     width: PropTypes.number
   };
   ImgsViewer.defaultProps = {
-    closeBtnTitle: "关闭（空格键）",
     currImg: 0,
     enableKeyboardInput: true,
     imgCountSeparator: " / ",
-    leftArrowTitle: "上一张（向左键）",
     onClickShowNextImg: true,
     preloadNextImg: true,
     preventScroll: true,
-    rightArrowTitle: "下一张（向右键）",
     showCloseBtn: true,
     showImgCount: true,
     spinnerDisabled: false,
