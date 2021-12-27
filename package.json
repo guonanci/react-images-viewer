@@ -1,6 +1,6 @@
 {
   "name": "react-images-viewer",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "Create an react-images-viewer component.",
   "main": "lib/ImgsViewer.js",
   "jsnext:main": "dist/react-images-viewer.es.js",
@@ -88,8 +88,8 @@
     "webpack-dev-server": "^3.1.5"
   },
   "peerDependencies": {
-    "react": "^15.0 || ^16.0",
-    "react-dom": "^15.0 || ^16.0"
+    "react": "^15.0 || ^16.0 || ^17.0",
+    "react-dom": "^15.0 || ^16.0 || ^17.0"
   },
   "dependencies": {
     "aphrodite": "^2.2.2",

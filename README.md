@@ -93,38 +93,38 @@ const IMG_SET = [
 
 ## Options
 
-| Property            | Type   | Default        | Description                                                                                                                     |
-| :------------------ | :----- | :------------- | :------------------------------------------------------------------------------------------------------------------------------ |
-| backdropCloseable   | bool   | false          | Allow users to exit the viewer by clicking the backdrop                                                                         |
-| closeBtnTitle       | str    | undefined      | Customize close esc title                                                                                                       |
-| enableKeyboardInput | bool   | true           | Supports keyboard input - <code>space, esc</code>, <code> arrow left, arrow up</code>, and <code>arrow right, arrow down</code> |
-| currImg             | num    | 0              | Required if you want to navigate the imgsViewer, The index of the image to display initially                                    |
-| customControls      | arr    | undefined      | An array of elements to display as custom controls on the top of viewer                                                         |
-| imgs                | arr    | undefined      | Required. Array of image objects, See img opts table below                                                                      |
-| imgCountSeparator   | str    | ' / '          | Customize separator in the image count                                                                                          |
-| isOpen              | bool   | false          | Required if you want to navigate the imgsViewer, Whether or not the viewer is displayed                                         |
-| leftArrowTitle      | str    | undefined      | Customize of left arrow title                                                                                                   |
-| onClickPrev         | func   | undefined      | Required if you want to navigate the imgsViewer, and fired on request of the previous image                                     |
-| onClickNext         | func   | undefined      | Required if you want to navigate the imgsViewer, and fired on request of the next image                                         |
-| onClose             | func   | undefined      | Required if you want to close the imgsViewer, and handle closing of the viewer                                                  |
-| onClickImg          | func   | undefined      | Handle click on current image                                                                                                   |
-| onClickThumbnail    | func   | undefined      | Handle click on thumbnail                                                                                                       |
-| preloadNextImg      | bool   | true           | Whether to preload the next available image                                                                                     |
-| rightArrowTitle     | str    | undefined      | Customize right arrow title                                                                                                     |
-| showCloseBtn        | bool   | true           | Optionally display a close 'X' button in top right corner                                                                       |
-| showImgCount        | bool   | true           | Optionally display image index, e.g., "2 of 20"                                                                                 |
-| width               | number | 1024           | Maximum width of the carousel; defaults to 1024px                                                                               |
-| spinnerDisabled     | bool   | false          | Disable Spinner                                                                                                                 |
-| spinner             | func   | DefaultSpinner | Spinner component class                                                                                                         |
-| spinnerColor        | str    | '#fff'         | Color of spinner                                                                                                                |
-| spinnnerSize        | num    | 50             | Size of spinner                                                                                                                 |
-| preventAutoScroll   | bool   | true           | Determines whether auto-scrolling is prevented                                                                                  |
+| Property            | Type       | Default          | Description                                                                                                                     |
+| :------------------ | :--------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------ |
+| backdropCloseable   | `boolean`  | `false`          | Allow users to exit the viewer by clicking the backdrop                                                                         |
+| closeBtnTitle       | `str`      | `undefined`      | Customize close esc title                                                                                                       |
+| enableKeyboardInput | `boolean`  | `true`           | Supports keyboard input - <code>space, esc</code>, <code> arrow left, arrow up</code>, and <code>arrow right, arrow down</code> |
+| currImg             | `number`   | `0`              | Required if you want to navigate the imgsViewer, The index of the image to display initially                                    |
+| customControls      | arr        | `undefined`      | An array of elements to display as custom controls on the top of viewer                                                         |
+| imgs                | arr        | `undefined`      | Required. Array of image objects, See img opts table below                                                                      |
+| imgCountSeparator   | `str`      | `' / '`          | Customize separator in the image count                                                                                          |
+| isOpen              | `boolean`  | `false`          | Required if you want to navigate the imgsViewer, Whether or not the viewer is displayed                                         |
+| leftArrowTitle      | `str`      | `undefined`      | Customize of left arrow title                                                                                                   |
+| onClickPrev         | `function` | `undefined`      | Required if you want to navigate the imgsViewer, and fired on request of the previous image                                     |
+| onClickNext         | `function` | `undefined`      | Required if you want to navigate the imgsViewer, and fired on request of the next image                                         |
+| onClose             | `function` | `undefined`      | Required if you want to close the imgsViewer, and handle closing of the viewer                                                  |
+| onClickImg          | `function` | `undefined`      | Handle click on current image                                                                                                   |
+| onClickThumbnail    | `function` | `undefined`      | Handle click on thumbnail                                                                                                       |
+| preloadNextImg      | `boolean`  | `true`           | Whether to preload the next available image                                                                                     |
+| rightArrowTitle     | `str`      | `undefined`      | Customize right arrow title                                                                                                     |
+| showCloseBtn        | `boolean`  | `true`           | Optionally display a close 'X' button in top right corner                                                                       |
+| showImgCount        | `boolean`  | `true`           | Optionally display image index, e.g., "2 of 20"                                                                                 |
+| width               | `number`   | `1024`           | Maximum width of the carousel; defaults to 1024px                                                                               |
+| spinnerDisabled     | `boolean`  | `false`          | Disable Spinner                                                                                                                 |
+| spinner             | `function` | `DefaultSpinner` | Spinner component class                                                                                                         |
+| spinnerColor        | `str`      | `'#fff'`         | Color of spinner                                                                                                                |
+| spinnerSize         | `number`   | `50`             | Size of spinner                                                                                                                 |
+| preventAutoScroll   | `boolean`  | `true`           | Determines whether auto-scrolling is prevented                                                                                  |
 
-## Imgs Object
+## Images Object
 
-| Property | Type              | Default   | Description |
-| :------- | :---------------- | :-------- | :---------- |
-| src      | str               | undefined | Required    |
-| srcSet   | arr of str or str | undefined | Optional    |
-| caption  | str               | undefined | Optional    |
-| alt      | str               | undefined | Optional    |
+| Property | Type      | Default     | Description |
+| :------- | :-------- | :---------- | :---------- | -------- |
+| src      | `str`     | `undefined` | Required    |
+| srcSet   | `string[] | string`     | `undefined` | Optional |
+| caption  | `str`     | `undefined` | Optional    |
+| alt      | `str`     | `undefined` | Optional    |
