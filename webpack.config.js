@@ -1,25 +1,24 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  mode: 'development',
-  context: path.resolve(__dirname, 'examples/src'),
+  mode: "development",
+  context: path.resolve(__dirname, "examples/src"),
   entry: {
-    app: './app.js',
-    app_CN: './app_CN.js',
-    common: [
-      'react-images-viewer'
-    ]
+    app: "./app.js",
+    app_CN: "./app_CN.js",
+    common: ["react-images-viewer"],
   },
   output: {
-    path: path.resolve(__dirname, 'examples/dist'),
-    filename: '[name].js',
-    publicPath: '/',
+    path: path.resolve(__dirname, "examples/dist"),
+    filename: "[name].js",
+    publicPath: "/",
   },
+  devtool: "inline-source-map",
   devServer: {
-    contentBase: path.resolve(__dirname, 'examples/src'),
-    host: '0.0.0.0',
+    contentBase: path.resolve(__dirname, "examples/src"),
+    host: "0.0.0.0",
     port: 8001,
   },
   module: {
@@ -27,31 +26,31 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: [/node_modules/],
-        use: [{
-          loader: 'babel-loader',
-          options: { presets: ['react', 'env'] },
-        }],
-      },
-      {
-        test: /\.less$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'less-loader',
+          {
+            loader: "babel-loader",
+            options: { presets: ["react", "env"] },
+          },
         ],
       },
       {
+        test: /\.less$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
+      },
+      {
         test: /\.html$/,
-        use: [{
-          loader: 'html-loader',
-        }]
+        use: [
+          {
+            loader: "html-loader",
+          },
+        ],
       },
     ],
   },
   resolve: {
     alias: {
-      'react-images-viewer': path.resolve(__dirname, 'src/ImgsViewer'),
-    }
+      "react-images-viewer": path.resolve(__dirname, "src/ImgsViewer"),
+    },
   },
   optimization: {
     splitChunks: {
@@ -61,23 +60,26 @@ module.exports = {
       cacheGroups: {
         common: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'common',
-          chunks: 'all'
-        }
-      }
-    }
+          name: "common",
+          chunks: "all",
+        },
+      },
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: "index.html",
       inject: false,
-      template: path.resolve(__dirname, 'examples/src/index.html')
+      template: path.resolve(__dirname, "examples/src/index.html"),
     }),
     new HtmlWebpackPlugin({
-      filename: 'index_CN.html',
+      filename: "index_CN.html",
       inject: false,
-      template: path.resolve(__dirname, 'examples/src/index_CN.html')
+      template: path.resolve(__dirname, "examples/src/index_CN.html"),
     }),
-    new MiniCssExtractPlugin({ filename: 'example.css', chunkFilename: 'example.css' }),
-  ]
+    new MiniCssExtractPlugin({
+      filename: "example.css",
+      chunkFilename: "example.css",
+    }),
+  ],
 };

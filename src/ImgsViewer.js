@@ -24,7 +24,10 @@ function normalizeSourceSet(data) {
   return sourceSet;
 }
 
-const ThemeContext = React.createContext(defaultTheme);
+const ThemeContext = React.createContext({
+  theme: defaultTheme,
+  toggleTheme: (newTheme) => {},
+});
 
 class ImgsViewer extends Component {
   constructor(props) {
@@ -34,8 +37,13 @@ class ImgsViewer extends Component {
     this.classes = StyleSheet.create(
       deepMerge(defaultStyles, this.props.theme)
     );
+    this.toggleTheme = (theme) => {
+      this.setState(() => ({ theme }));
+    };
     this.state = {
       imgLoaded: false,
+      theme: this.theme,
+      toggleTheme: this.toggleTheme,
     };
 
     bindFunctions.call(this, [
@@ -218,7 +226,7 @@ class ImgsViewer extends Component {
       />
     );
   }
-  renderDialog() {
+  renderDialog(newState) {
     const { backdropCloseable, isOpen, showThumbnails, width } = this.props;
 
     const { imgLoaded } = this.state;
@@ -231,35 +239,39 @@ class ImgsViewer extends Component {
 
     return (
       <ThemeContext.Consumer>
-        {(theme) => (
-          <Container
-            theme={theme}
-            key="open"
-            onClick={backdropCloseable && this.closeBackdrop}
-            onTouchEnd={backdropCloseable && this.closeBackdrop}
-          >
-            <Fragment>
-              <div
-                className={css(this.classes.content)}
-                style={{
-                  marginBottom: offsetThumbnails,
-                  maxWidth: width,
-                }}
-              >
-                {imgLoaded && this.renderHeader(theme)} {this.renderImgs()}
-                {this.renderSpinner()} {imgLoaded && this.renderFooter(theme)}
-              </div>
-              {imgLoaded && this.renderThumbnails(theme)}
-              {imgLoaded && this.renderArrowPrev(theme)}
-              {imgLoaded && this.renderArrowNext(theme)}
-              {this.props.preventScroll && <ScrollLock />}
-            </Fragment>
-          </Container>
-        )}
+        {({ theme, toggleTheme }) => {
+          theme = newState.theme;
+          return (
+            <Container
+              theme={theme}
+              key="open"
+              onClick={backdropCloseable && this.closeBackdrop}
+              onTouchEnd={backdropCloseable && this.closeBackdrop}
+            >
+              <Fragment>
+                <div
+                  className={css(this.classes.content)}
+                  style={{
+                    marginBottom: offsetThumbnails,
+                    maxWidth: width,
+                  }}
+                >
+                  {imgLoaded && this.renderHeader(theme)}{" "}
+                  {this.renderImgs(theme)}
+                  {this.renderSpinner()} {imgLoaded && this.renderFooter(theme)}
+                </div>
+                {imgLoaded && this.renderThumbnails(theme)}
+                {imgLoaded && this.renderArrowPrev(theme)}
+                {imgLoaded && this.renderArrowNext(theme)}
+                {this.props.preventScroll && <ScrollLock />}
+              </Fragment>
+            </Container>
+          );
+        }}
       </ThemeContext.Consumer>
     );
   }
-  renderImgs() {
+  renderImgs(theme) {
     const { currImg, imgs, onClickImg, showThumbnails } = this.props;
 
     const { imgLoaded } = this.state;
@@ -270,12 +282,12 @@ class ImgsViewer extends Component {
     const sourceSet = normalizeSourceSet(img);
     const sizes = sourceSet ? "100vw" : null;
 
-    const thumbnailsSize = showThumbnails ? this.theme.thumbnail.size : 0;
+    const thumbnailsSize = showThumbnails ? theme.thumbnail.size : 0;
     const heightOffset = `${
-      this.theme.header.height +
-      this.theme.footer.height +
+      theme.header.height +
+      theme.footer.height +
       thumbnailsSize +
-      this.theme.container.gutter.vertical
+      theme.container.gutter.vertical
     }px`;
 
     return (
@@ -366,10 +378,11 @@ class ImgsViewer extends Component {
       </div>
     );
   }
+
   render() {
     return (
-      <ThemeContext.Provider value={this.props.theme}>
-        <Portal> {this.renderDialog()} </Portal>
+      <ThemeContext.Provider value={this.state}>
+        <Portal> {this.renderDialog(this.state)} </Portal>
       </ThemeContext.Provider>
     );
   }

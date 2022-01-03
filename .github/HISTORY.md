@@ -1,8 +1,8 @@
 # React-Images-Viewer
 
-### v1.6.8 / 2021-11-26
+### v1.6.8 / 2022-01-03
 
-- Update: fix issues: #25, # 28, #33, #36,
+- Update: fix issues: #28, #38
 
 ### v1.3.0 / 2018-07-24
 
