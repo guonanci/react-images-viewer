@@ -6,9 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build
-# lib
-# dist
-# examples/dist
+lib
+dist
+examples/dist
 
 # Webstorm
 .idea/
