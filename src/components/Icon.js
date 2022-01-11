@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import arrowLeft from "../icons/arrow_left";
 import arrowRight from "../icons/arrow_right";
-import close from "../icons/Close";
+import close from "../icons/close";
 
 const icons = { arrowLeft, arrowRight, close };
 
