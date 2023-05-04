@@ -122,9 +122,9 @@ const IMG_SET = [
 
 ## Images Object
 
-| Property | Type      | Default     | Description |
-| :------- | :-------- | :---------- | :---------- | -------- |
-| src      | `str`     | `undefined` | Required    |
-| srcSet   | `string[] | string`     | `undefined` | Optional |
-| caption  | `str`     | `undefined` | Optional    |
-| alt      | `str`     | `undefined` | Optional    |
+| Property | Type       | Default     | Description |
+| :------- | :--------  | :---------- | :---------- |
+| src      | `str`      | `undefined` | Required    |
+| srcSet   | `string[]` | `undefined` | Optional    |
+| caption  | `str`      | `undefined` | Optional    |
+| alt      | `str`      | `undefined` | Optional    |
