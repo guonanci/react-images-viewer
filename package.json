@@ -58,7 +58,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "coveralls": "^3.0.2",
-    "css-loader": "^1.0.0",
+    "css-loader": "^6.8.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^5.1.0",
